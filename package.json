@@ -30,6 +30,7 @@
   "dependencies": {
     "arg": "^4.1.2",
     "esm": "^3.2.25",
-    "inquirer": "^7.0.0"
+    "inquirer": "^7.0.0",
+    "inquirer-fuzzy-path": "^2.1.0"
   }
 }

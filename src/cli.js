@@ -24,10 +24,15 @@ async function promptForMissingOptions(options) {
 
     // If the user didn't specify a directory 
     if (!options.folderToImplode) {
+        inquirer.registerPrompt('fuzzypath', require('inquirer-fuzzy-path'))
         questions.push({
-            type: 'String',
+            type: 'fuzzypath',
             name: 'folderToImplode',
             message: 'Please give us the location of the folder to make the CSS implode',
+            excludePath: nodePath => nodePath.startsWith('.git'),
+            itemType: 'directory',
+            suggestOnly: false,
+            depthLimit: 5,
             default: actualDirectory,
         });
     }
