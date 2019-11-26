@@ -23,6 +23,6 @@
         "global-require": "off",
         "eqeqeq": "warn",
         "max-len": "warn",
-        "no-plusplus": "off",
+        "no-plusplus": "off"
     }
 }

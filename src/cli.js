@@ -1,6 +1,7 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
-import showOptionsAndProceed from './main';
+import showOptions from './main';
+var mainFile = require('./main.js');
 
 function parseArgumentsIntoOptions(rawArgs) {
     const args = arg({
@@ -69,5 +70,6 @@ async function promptForMissingOptions(options) {
 export async function cli(args) {
     let options = parseArgumentsIntoOptions(args);
     options = await promptForMissingOptions(options);
-    await showOptionsAndProceed(options);
+    await showOptions(options);
+    await mainFile.auditCode(options.folderToImplode);
 }
