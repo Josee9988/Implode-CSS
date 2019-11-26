@@ -1,21 +1,27 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
-import showOptions from './main';
-var mainFile = require('./main.js');
+var mainFile = require('./main');
+var informationCLI = require('./informationCLI');
 
 function parseArgumentsIntoOptions(rawArgs) {
     const args = arg({
         '--audit': Boolean,
         '--fix': Boolean,
         '--yes': Boolean,
+        '--help': Boolean,
+        '--version': Boolean,
         '-a': '--audit',
         '-f': '--fix',
         '-y': '--yes',
+        '-h': '--help',
+        '-v': '--version'
     })
     return {
         defaultOptions: args['--yes'] || false,
         audit: args['--audit'] || false,
         fix: args['--fix'] || false,
+        help: args['--help'] || false,
+        version: args['--version'] || false,
         folderToImplode: args._[0],
     }
 }
@@ -28,6 +34,7 @@ async function promptForMissingOptions(options) {
         return {
             ...options,
             folderToImplode: actualDirectory,
+            audit: true
         }
     }
 
@@ -69,7 +76,14 @@ async function promptForMissingOptions(options) {
 
 export async function cli(args) {
     let options = parseArgumentsIntoOptions(args);
-    options = await promptForMissingOptions(options);
-    await showOptions(options);
-    await mainFile.auditCode(options.folderToImplode);
+    if (!options.help && !options.version) {
+        options = await promptForMissingOptions(options);
+        informationCLI.showOptions(options);
+        options.audit ? await mainFile.auditCode(options.folderToImplode) :
+            await mainFile.fixCode(options.folderToImplode);
+    } else if (options.help) { // if the user specified help
+        informationCLI.showHelp();
+    } else if (options.version) { // if the user specified version
+        informationCLI.showVersion();
+    }
 }
