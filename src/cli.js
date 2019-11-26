@@ -1,22 +1,20 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
+import showOptionsAndProceed from './main';
 
 function parseArgumentsIntoOptions(rawArgs) {
     const args = arg({
         '--audit': Boolean,
         '--fix': Boolean,
-        '--debug': Boolean,
         '--yes': Boolean,
         '-a': '--audit',
         '-f': '--fix',
-        '-d': '--debug',
         '-y': '--yes',
     })
     return {
         defaultOptions: args['--yes'] || false,
         audit: args['--audit'] || false,
         fix: args['--fix'] || false,
-        debug: args['--debug'] || false,
         folderToImplode: args._[0],
     }
 }
@@ -71,5 +69,5 @@ async function promptForMissingOptions(options) {
 export async function cli(args) {
     let options = parseArgumentsIntoOptions(args);
     options = await promptForMissingOptions(options);
-    console.log(options);
+    await showOptionsAndProceed(options);
 }

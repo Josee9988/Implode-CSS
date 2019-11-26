@@ -4,8 +4,8 @@
   "description": "package that removes all unused CSS classes and ids from a project",
   "main": "src/index.js",
   "bin": {
-    "@josee9988/implodeCss": "bin/implodeCss",
-    "implodeCss": "bin/implodeCss"
+    "@josee9988/implodeCss": "bin/implodeCss.js",
+    "implodeCss": "bin/implodeCss.js"
   },
   "publishConfig": {
     "access": "public"
@@ -29,6 +29,7 @@
   "homepage": "https://github.com/Josee9988/Implode-CSS#readme",
   "dependencies": {
     "arg": "^4.1.2",
+    "chalk": "^3.0.0",
     "esm": "^3.2.25",
     "inquirer": "^7.0.0",
     "inquirer-fuzzy-path": "^2.1.0"
