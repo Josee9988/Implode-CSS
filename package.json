@@ -32,5 +32,8 @@
     "esm": "^3.2.25",
     "inquirer": "^7.0.0",
     "inquirer-fuzzy-path": "^2.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.1"
   }
 }

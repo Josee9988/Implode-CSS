@@ -6,11 +6,14 @@ function parseArgumentsIntoOptions(rawArgs) {
         '--audit': Boolean,
         '--fix': Boolean,
         '--debug': Boolean,
+        '--yes': Boolean,
         '-a': '--audit',
         '-f': '--fix',
-        '-d': '--debug'
+        '-d': '--debug',
+        '-y': '--yes',
     })
     return {
+        defaultOptions: args['--yes'] || false,
         audit: args['--audit'] || false,
         fix: args['--fix'] || false,
         debug: args['--debug'] || false,
@@ -21,6 +24,13 @@ function parseArgumentsIntoOptions(rawArgs) {
 async function promptForMissingOptions(options) {
     const actualDirectory = process.cwd();
     const questions = [];
+
+    if (options.defaultOptions) {
+        return {
+            ...options,
+            folderToImplode: actualDirectory,
+        }
+    }
 
     // If the user didn't specify a directory 
     if (!options.folderToImplode) {
