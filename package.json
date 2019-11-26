@@ -1,0 +1,35 @@
+{
+  "name": "@josee9988/implode-css",
+  "version": "1.0.0",
+  "description": "package that removes all unused CSS classes and ids from a project",
+  "main": "src/index.js",
+  "bin": {
+    "@josee9988/implodeCss": "bin/implodeCss",
+    "implodeCss": "bin/implodeCss"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "cli",
+    "implodeCss"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Josee9988/Implode-CSS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Josee9988/Implode-CSS/issues"
+  },
+  "homepage": "https://github.com/Josee9988/Implode-CSS#readme",
+  "dependencies": {
+    "arg": "^4.1.2",
+    "esm": "^3.2.25",
+    "inquirer": "^7.0.0"
+  }
+}
