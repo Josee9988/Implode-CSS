@@ -10,6 +10,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import readline from 'readline';
 import exitCodes from './Exceptions/exitCodes';
 
 
@@ -51,19 +52,18 @@ export function findFilesInDir(startPath, filter) {
 }
 
 export function getCssReferencedInHtml(filePath) {
-    fs.readFile(filePath, {
-        encoding: 'utf-8',
-    }, (err, data) => {
-        if (!err) { // file found
-            this.getIdsAndClassesFromString(data);
-        } else {
-            console.log(err);
+    let ids = [];
+    fs.readFileSync(filePath, 'utf-8').split(/\r?\n/).forEach((line) => {
+        if (this.getIdsFromString(line) !== undefined) {
+            ids.push(this.getIdsFromString(line));
         }
     });
+    console.log(ids);
 }
 
-export function getIdsAndClassesFromString(lineWithCss) {
-    console.log(`linea: ${lineWithCss}`);
-    const idDoubleNormalComma = lineWithCss.replace(/(id="(.*?)(\"))/g, '');
-    console.log(/(id="(.*?)(\"))/g.exec(lineWithCss)[2]);
+export function getIdsFromString(lineWithCss) {
+    const idFound = lineWithCss.match(/(id="(.*?)(\"))|(id='(.*?)(\'))|(id=`(.*?)(\`))/g);
+    if (idFound !== null) {
+        return idFound.toString().substr(4, idFound.toString().length - 5);
+    }
 }
