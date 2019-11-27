@@ -16,8 +16,8 @@ export async function auditCode(folderToImplode) {
     const cssFiles = getFilesAndStyles.findFilesInDir(folderToImplode, '.html');
 
     for (let i = 0; i < htmlPhpFiles.length; i++) {
-        console.log('a');
-        console.log(getFilesAndStyles.getCssReferencedInHtml(htmlPhpFiles[i]));
+        // console.log('a');
+        // console.log(getFilesAndStyles.getCssReferencedInHtml(htmlPhpFiles[i]));
     }
     // get the css:
 }
