@@ -2,8 +2,8 @@ import arg from 'arg';
 import confirm from '@inquirer/confirm';
 import exitCodes from './exitCodes';
 import promptForMissingOptions from './promptCLI';
-var mainFile = require('./main');
-var informationCLI = require('./informationCLI');
+const mainFile = require('./main');
+const informationCLI = require('./informationCLI');
 
 
 function parseArgumentsIntoOptions(rawArgs) {
@@ -45,7 +45,7 @@ export async function cli(args) {
         informationCLI.showOptions(options);
 
         if (options.audit) { // if the user wants to audit
-            //await mainFile.auditCode(options.folderToImplode);
+            await mainFile.auditCode(options.folderToImplode);
             console.log('AUDITING');
         } else if (options.fix) { // if the user wants to fix
             const answer = await confirm({
