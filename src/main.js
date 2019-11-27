@@ -3,9 +3,10 @@
  *
  * @author Jose Gracia Berenguer
  * @since 1.0.0.
+ * @link https://github.com/Josee9988/Implode-CSS
  */
-const getFilesAndStyles = require('./getFilesAndStyles');
 
+const getFilesAndStyles = require('./getFilesAndStyles');
 
 
 export async function auditCode(folderToImplode) {
@@ -24,13 +25,6 @@ export async function auditCode(folderToImplode) {
 export async function fixCode(folderToImplode) {
 
 }
-
-
-
-
-
-
-
 
 
 exports.auditCode = auditCode;

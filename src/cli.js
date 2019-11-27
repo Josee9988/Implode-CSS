@@ -1,11 +1,34 @@
+/**
+ * @file cli contains the main commands to receive the raw arguments, interpret
+ * it and then calls to the proper functions given by the user.
+ *
+ * @author Jose Gracia Berenguer
+ * @since 1.0.0
+ * @link https://github.com/Josee9988/Implode-CSS
+ */
+
 import arg from 'arg';
 import confirm from '@inquirer/confirm';
 import exitCodes from './exitCodes';
 import promptForMissingOptions from './promptCLI';
-const mainFile = require('./main');
-const informationCLI = require('./informationCLI');
+import {
+    auditCode,
+    fixCode,
+} from './main';
+import {
+    showOptions,
+    showHelp,
+    showVersion,
+} from './informationCLI';
 
 
+/**
+ * Summary: parseArgumentsIntoOptions receives the raw arguments given by
+ * the user and transform them into an object that will be returned.
+ *
+ * @param {object} rawArgs arguments directly given by the user.
+ * @return {object} options as a JavaScript object.
+ */
 function parseArgumentsIntoOptions(rawArgs) {
     const args = arg({
         '--audit': Boolean,
@@ -17,10 +40,10 @@ function parseArgumentsIntoOptions(rawArgs) {
         '-f': '--fix',
         '-y': '--yes',
         '-h': '--help',
-        '-v': '--version'
+        '-v': '--version',
     }, {
         argv: rawArgs.slice(2),
-    })
+    });
     return {
         defaultOptions: args['--yes'] || false,
         audit: args['--audit'] || false,
@@ -28,41 +51,45 @@ function parseArgumentsIntoOptions(rawArgs) {
         help: args['--help'] || false,
         version: args['--version'] || false,
         folderToImplode: args._[0],
-    }
+    };
 }
 
 
-
-export async function cli(args) {
+/**
+ * Summary: cli is a funcion called from 'bin/implodeCss.js' that receives the
+ * arguments given by the user, and makes all the function calls ordered
+ * by these arguments.
+ *
+ * @param {object} rawArgs arguments directly given by the user.
+ * @return {void}
+ */
+export async function cli(rawArgs) {
     let options;
     try {
-        options = parseArgumentsIntoOptions(args);
+        options = parseArgumentsIntoOptions(rawArgs);
     } catch (error) {
-        exitCodes(400, args);
+        exitCodes(400, rawArgs);
     }
     if (!options.help && !options.version) {
         options = await promptForMissingOptions(options);
-        informationCLI.showOptions(options);
+        showOptions(options);
 
         if (options.audit) { // if the user wants to audit
-            await mainFile.auditCode(options.folderToImplode);
-            console.log('AUDITING');
+            await auditCode(options.folderToImplode);
         } else if (options.fix) { // if the user wants to fix
             const answer = await confirm({
                 message: 'Do you want to fix your data, please do a backup first?',
                 default: true,
             });
             if (answer === true) { // if the user wants to continue
-                //await mainFile.fixCode(options.folderToImplode);
-                console.log('FIXING');
+                await fixCode(options.folderToImplode);
             } else { // if the user cancelled the operation we will leave
                 exitCodes(200);
             }
         }
-
     } else if (options.help) { // if the user specified help
-        informationCLI.showHelp();
+        showHelp();
     } else if (options.version) { // if the user specified version
-        informationCLI.showVersion();
+        showVersion();
     }
 }
