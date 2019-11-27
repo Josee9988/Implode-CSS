@@ -7,6 +7,7 @@
  */
 
 import chalk from 'chalk';
+import exitCodes from './Exceptions/exitCodes';
 
 const getFilesAndStyles = require('./getFilesAndStyles');
 
@@ -22,16 +23,19 @@ const getFilesAndStyles = require('./getFilesAndStyles');
  */
 export async function auditCode(folderToImplode) {
     const htmlPhpFiles = getFilesAndStyles.getArrayHtmlPhpPaths(folderToImplode);
-
     const cssFiles = getFilesAndStyles.findFilesInDir(folderToImplode, '.css');
 
-    console.log(`Found: ${chalk.bold.yellow(htmlPhpFiles.length)} files that may contain references to CSS styles`);
-    console.log(`Found: ${chalk.bold.yellow(cssFiles.length)} files that contain CSS styles`);
+    console.log(`Found: ${chalk.bold.yellow(htmlPhpFiles.length)} files that may contain references to CSS styles.`);
+    console.log(`Found: ${chalk.bold.yellow(cssFiles.length)} files that contain CSS styles.\n`);
 
-    // for (let i = 0; i < htmlPhpFiles.length; i++) {
-    // console.log('a');
-    // console.log(getFilesAndStyles.getCssReferencedInHtml(htmlPhpFiles[i]));
-    // }
+    // if there is not enough files to look for.
+    if (htmlPhpFiles.length === 0 || cssFiles.length === 0) {
+        exitCodes(404);
+    }
+
+    for (let i = 0; i < htmlPhpFiles.length; i++) { // TODO: make this work
+        console.log(getFilesAndStyles.getCssReferencedInHtml(htmlPhpFiles[i]));
+    }
     // get the css:
 }
 
@@ -45,7 +49,7 @@ export async function auditCode(folderToImplode) {
  * @return {void}
  */
 export async function fixCode(folderToImplode) {
-
+    console.log('TODO');
 }
 
 

@@ -2,7 +2,7 @@
   "name": "@josee9988/implode-css",
   "version": "1.0.0",
   "description": "package that removes all unused CSS classes and ids from a project",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "bin": {
     "@josee9988/implodeCss": "bin/implodeCss.js",
     "implodeCss": "bin/implodeCss.js"

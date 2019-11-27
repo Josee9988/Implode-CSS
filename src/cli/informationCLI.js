@@ -8,7 +8,7 @@
  */
 
 import chalk from 'chalk';
-import version from '../package.json';
+import version from '../../package.json';
 
 
 /**

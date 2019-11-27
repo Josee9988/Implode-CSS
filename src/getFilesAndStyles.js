@@ -10,15 +10,19 @@
 
 import fs from 'fs';
 import path from 'path';
-import exitCodes from './exitCodes';
+import exitCodes from './Exceptions/exitCodes';
 
-const readline = require('readline');
 
+/**
+ * Main function that gathers all the path to the files with extensions
+ * HTML and PHP, and returns them as an array.
+ *
+ * @param {String} folderToImplode path to the folder.
+ * @return {Array} array with all the HTML and PHP files found in the directory
+ */
 export function getArrayHtmlPhpPaths(folderToImplode) {
     const htmlFiles = this.findFilesInDir(folderToImplode, '.html');
     const phpFiles = this.findFilesInDir(folderToImplode, '.php');
-
-
     return htmlFiles.concat(phpFiles);
 }
 
@@ -32,9 +36,6 @@ export function getArrayHtmlPhpPaths(folderToImplode) {
  */
 export function findFilesInDir(startPath, filter) {
     let results = [];
-
-
-
     const files = fs.readdirSync(startPath);
     for (let i = 0; i < files.length; i++) {
         const filename = path.join(startPath, files[i]);
@@ -54,8 +55,7 @@ export function getCssReferencedInHtml(filePath) {
         encoding: 'utf-8',
     }, (err, data) => {
         if (!err) { // file found
-            // console.log('received data: ' + data);
-            getIdsAndClassesFromString(data);
+            this.getIdsAndClassesFromString(data);
         } else {
             console.log(err);
         }

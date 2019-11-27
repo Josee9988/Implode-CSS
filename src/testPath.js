@@ -4,12 +4,12 @@
  * the program and shows an output of the error.
  *
  * @author Jose Gracia Berenguer
- * @since .
- * @link .
+ * @since 1.0.0
+ * @link https://github.com/Josee9988/Implode-CSS
  */
 
 import fs from 'fs';
-import exitCodes from './exitCodes';
+import exitCodes from './Exceptions/exitCodes';
 
 /**
  * Summary: tesPath analyzes a path and checks if it has read, write and or
