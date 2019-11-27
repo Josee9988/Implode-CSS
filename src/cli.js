@@ -11,6 +11,7 @@ import arg from 'arg';
 import confirm from '@inquirer/confirm';
 import exitCodes from './exitCodes';
 import promptForMissingOptions from './promptCLI';
+import testPath from './testPath';
 import {
     auditCode,
     fixCode,
@@ -72,6 +73,7 @@ export async function cli(rawArgs) {
     }
     if (!options.help && !options.version) {
         options = await promptForMissingOptions(options);
+        testPath(options.folderToImplode);
         showOptions(options);
 
         if (options.audit) { // if the user wants to audit

@@ -6,6 +6,8 @@
  * @link https://github.com/Josee9988/Implode-CSS
  */
 
+import chalk from 'chalk';
+
 const getFilesAndStyles = require('./getFilesAndStyles');
 
 
@@ -19,10 +21,12 @@ const getFilesAndStyles = require('./getFilesAndStyles');
  * @return {void}
  */
 export async function auditCode(folderToImplode) {
-
     const htmlPhpFiles = getFilesAndStyles.getArrayHtmlPhpPaths(folderToImplode);
 
     const cssFiles = getFilesAndStyles.findFilesInDir(folderToImplode, '.css');
+
+    console.log(`Found: ${chalk.bold.yellow(htmlPhpFiles.length)} files that may contain references to CSS styles`);
+    console.log(`Found: ${chalk.bold.yellow(cssFiles.length)} files that contain CSS styles`);
 
     // for (let i = 0; i < htmlPhpFiles.length; i++) {
     // console.log('a');

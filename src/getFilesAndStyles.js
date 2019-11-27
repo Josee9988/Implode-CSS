@@ -9,9 +9,9 @@
  */
 
 import fs from 'fs';
-import chalk from 'chalk';
 import path from 'path';
 import exitCodes from './exitCodes';
+
 const readline = require('readline');
 
 export function getArrayHtmlPhpPaths(folderToImplode) {
@@ -33,22 +33,19 @@ export function getArrayHtmlPhpPaths(folderToImplode) {
 export function findFilesInDir(startPath, filter) {
     let results = [];
 
-    if (!fs.existsSync(startPath)) {
-        exitCodes(401, startPath);
-        return;
-    }
 
-    let files = fs.readdirSync(startPath);
+
+    const files = fs.readdirSync(startPath);
     for (let i = 0; i < files.length; i++) {
-        let filename = path.join(startPath, files[i]);
-        // filename = filename.toLocaleLowerCase();
-        let stat = fs.lstatSync(filename);
-        if (stat.isDirectory()) {
+        const filename = path.join(startPath, files[i]);
+        const stat = fs.lstatSync(filename);
+        if (stat.isDirectory() && !filename.match(/node_modules/g) && !filename.match(/.git/g)) {
             results = results.concat(findFilesInDir(filename, filter)); // recurse
         } else if (filename.indexOf(filter) >= 0) {
             results.push(filename);
         }
     }
+    // eslint-disable-next-line consistent-return
     return results;
 }
 
@@ -66,7 +63,7 @@ export function getCssReferencedInHtml(filePath) {
 }
 
 export function getIdsAndClassesFromString(lineWithCss) {
-    console.log(`linea: ${  lineWithCss}`);
+    console.log(`linea: ${lineWithCss}`);
     const idDoubleNormalComma = lineWithCss.replace(/(id="(.*?)(\"))/g, '');
     console.log(/(id="(.*?)(\"))/g.exec(lineWithCss)[2]);
 }

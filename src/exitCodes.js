@@ -40,9 +40,23 @@ export function showCodeAndExit(code, extraInformation = 'Not given') {
             console.error(`If you believe this is our fault, please let us know at: ${chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
             break;
 
-        case 401: // path does not exist or no permissions
+        case 401: // path does not exist
             console.error(`${chalk.bold.red('ERROR: ')}your path: '${chalk.bold.magenta(extraInformation)}' is wrong.`);
-            console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 401')} - The given path does not exist or there is a lack of permissions`);
+            console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 401')} - The given path does not exist.`);
+            console.error(`If you beleive this is our fault, please let us know at: ${
+                chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
+            break;
+
+        case 402: // path don't have read permissions
+            console.error(`${chalk.bold.red('ERROR: ')}your path: '${chalk.bold.magenta(extraInformation)}' is wrong.`);
+            console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 402')} - The given path does not have read permissions.`);
+            console.error(`If you beleive this is our fault, please let us know at: ${
+                chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
+            break;
+
+        case 403: // path don't have write permissions
+            console.error(`${chalk.bold.red('ERROR: ')}your path: '${chalk.bold.magenta(extraInformation)}' is wrong.`);
+            console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 403')} - The given path does not have write permissions.`);
             console.error(`If you beleive this is our fault, please let us know at: ${
                 chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
             break;
