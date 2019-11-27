@@ -1,3 +1,13 @@
+/**
+ * @file getFilesAndStyles contains all the functions which allow implodeCss to
+ * get all the file paths that may contain CSS referenced styles such as .html
+ * or .php, and also all the file paths that contains the styles itselfs .css.
+ *
+ * @author Jose Gracia Berenguer
+ * @since 1.0.0.
+ * @link https://github.com/Josee9988/Implode-CSS
+ */
+
 import fs from 'fs';
 import chalk from 'chalk';
 import path from 'path';

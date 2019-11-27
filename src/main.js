@@ -9,11 +9,20 @@
 const getFilesAndStyles = require('./getFilesAndStyles');
 
 
+/**
+ * Summary: audirCode is the main function of auditing. It does not make any
+ * modification or perform any specific task, it simply shows an output of the
+ * unused styles. Simply shows a preview of what might be fixed.
+ *
+ * @param {string} folderToImplode rootFolder in which we will look
+ * for unused CSS styles.
+ * @return {void}
+ */
 export async function auditCode(folderToImplode) {
 
     const htmlPhpFiles = getFilesAndStyles.getArrayHtmlPhpPaths(folderToImplode);
 
-    const cssFiles = getFilesAndStyles.findFilesInDir(folderToImplode, '.html');
+    const cssFiles = getFilesAndStyles.findFilesInDir(folderToImplode, '.css');
 
     for (let i = 0; i < htmlPhpFiles.length; i++) {
         // console.log('a');
@@ -22,6 +31,15 @@ export async function auditCode(folderToImplode) {
     // get the css:
 }
 
+/**
+ * Summary: fixCode is the main function of fixing. It does make all the
+ * modifications and fixes in order to remove all unused css styles. Also
+ * it shows a little output of what has been fixed.
+ *
+ * @param {string} folderToImplode rootFolder in which we will look
+ * for unused CSS styles.
+ * @return {void}
+ */
 export async function fixCode(folderToImplode) {
 
 }
