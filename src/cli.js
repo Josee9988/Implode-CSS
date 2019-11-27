@@ -92,4 +92,6 @@ export async function cli(rawArgs) {
     } else if (options.version) { // if the user specified version
         showVersion();
     }
+    // If the script hasn't stopped with any code, show a default exit output.
+    exitCodes(201);
 }

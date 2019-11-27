@@ -24,7 +24,11 @@ import chalk from 'chalk';
 export function showCodeAndExit(code, extraInformation = 'Not given') {
     switch (code) {
         case 200: // exiting OK
-            console.log(`Exiting without errors, thanks for trusting in ${chalk.green('implodeCss')}`);
+            console.log(`Exiting without errors, thanks for using ${chalk.green('implodeCss')}`);
+            break;
+
+        case 201: // exiting OK? This exit is a default one, and should not be used.
+            console.log(`Exiting without an expected code, thanks for using ${chalk.green('implodeCss')}`);
             break;
 
         case 400: // bad arguments passed
