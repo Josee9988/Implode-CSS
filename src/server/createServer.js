@@ -1,4 +1,13 @@
-/* eslint-disable prefer-arrow-callback */
+/**
+ * @file createServer contain the function to run a HTTP server.
+ *
+ * @author Jose Gracia Berenguer
+ * @since 1.0.0.
+ * @link https://github.com/Josee9988/Implode-CSS
+ */
+
+import chalk from 'chalk';
+
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
@@ -6,6 +15,12 @@ const path = require('path');
 
 const port = 4949;
 
+
+/**
+ * Summary: runs an HTTP server in localhost.
+ *
+ * @return {void}
+ */
 export function runHttpServer() {
     const mimeType = {
         '.ico': 'image/x-icon',
@@ -30,7 +45,7 @@ export function runHttpServer() {
 
         const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[/\\])+/, '');
         let pathname = path.join(__dirname, sanitizePath);
-        pathname += 'index.html';
+        pathname += '../public/index.html';
         fs.exists(pathname, (exist) => {
             if (!exist) {
                 // if the file is not found, return 404
@@ -56,9 +71,9 @@ export function runHttpServer() {
             });
         });
     }).listen(parseInt(port, 10));
-
-    console.log(`\tServer running in http://localhost:${port}`);
-    console.log(`\tServer running in http://127.0.0.1:${port}`);
+    console.log('  Server running at:');
+    console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://localhost:${port}`)}`);
+    console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://127.0.0.1:${port}`)}`);
 }
 
 export default runHttpServer;

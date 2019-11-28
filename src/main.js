@@ -7,8 +7,6 @@
  */
 
 import chalk from 'chalk';
-import fs from 'fs';
-import path from 'path';
 import exitCodes from './Exceptions/exitCodes';
 import {
     getArrayHtmlPhpPaths,
@@ -21,6 +19,7 @@ import {
 import getUnusedCss from './controller/geCssUnused';
 import testPathFile from './testPath';
 import server from './server/createServer';
+
 
 /**
  * Summary: auditCode is the main function of auditing. It does not make any
