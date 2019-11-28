@@ -17,6 +17,7 @@ import {
     getClassesReferencedInHtml,
 } from './controller/getCssReferenced';
 import getUnusedCss from './controller/geCssUnused';
+import testPathFile from './testPath';
 
 
 /**
@@ -75,6 +76,7 @@ async function mainGetUnusedCss(folderToImplode) {
     let ids = [];
     let classes = [];
     for (let i = 0; i < htmlPhpFiles.length; i++) {
+        testPathFile(htmlPhpFiles[i]); // test RW permissions.
         ids = ids.concat(getIdsReferencedInHtml(htmlPhpFiles[i]));
         classes = classes.concat(getClassesReferencedInHtml(htmlPhpFiles[i]));
     }
