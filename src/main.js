@@ -7,6 +7,8 @@
  */
 
 import chalk from 'chalk';
+import fs from 'fs';
+import path from 'path';
 import exitCodes from './Exceptions/exitCodes';
 import {
     getArrayHtmlPhpPaths,
@@ -18,7 +20,7 @@ import {
 } from './controller/getCssReferenced';
 import getUnusedCss from './controller/geCssUnused';
 import testPathFile from './testPath';
-
+import server from './server/createServer';
 
 /**
  * Summary: auditCode is the main function of auditing. It does not make any
@@ -31,7 +33,8 @@ import testPathFile from './testPath';
  * @return {void}
  */
 export async function auditCode(folderToImplode) {
-    const unusedStyles = mainGetUnusedCss(folderToImplode);
+    const unusedStyles = await mainGetUnusedCss(folderToImplode);
+    server();
 }
 
 
@@ -46,7 +49,7 @@ export async function auditCode(folderToImplode) {
  * @return {void}
  */
 export async function fixCode(folderToImplode) {
-    const unusedStyles = mainGetUnusedCss(folderToImplode);
+    const unusedStyles = await mainGetUnusedCss(folderToImplode);
 }
 
 

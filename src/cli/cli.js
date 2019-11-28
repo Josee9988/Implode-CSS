@@ -95,5 +95,5 @@ export async function cli(rawArgs) {
         showVersion();
     }
     // If the script hasn't stopped with any code, show a default exit output.
-    exitCodes(201);
+    // exitCodes(201);
 }
