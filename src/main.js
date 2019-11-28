@@ -11,11 +11,12 @@ import exitCodes from './Exceptions/exitCodes';
 import {
     getArrayHtmlPhpPaths,
     findFilesInDir,
-} from './controller/getFilesAndStyles';
+} from './controller/getFiles';
 import {
     getIdsReferencedInHtml,
     getClassesReferencedInHtml,
 } from './controller/getCssReferenced';
+import getUnusedCss from './controller/geCssUnused';
 
 /**
  * Summary: audirCode is the main function of auditing. It does not make any
@@ -37,15 +38,21 @@ export async function auditCode(folderToImplode) {
     if (htmlPhpFiles.length === 0 || cssFiles.length === 0) {
         exitCodes(404);
     }
+
+    // Find ids and classes in the HTML/PHP files
     let ids = [];
     let classes = [];
     for (let i = 0; i < htmlPhpFiles.length; i++) {
         ids = ids.concat(getIdsReferencedInHtml(htmlPhpFiles[i]));
         classes = classes.concat(getClassesReferencedInHtml(htmlPhpFiles[i]));
     }
+
     console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML\\PHP files.`);
     console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML\\PHP files.`);
+
+    getUnusedCss(cssFiles, ids, classes);
 }
+
 
 /**
  * Summary: fixCode is the main function of fixing. It does make all the

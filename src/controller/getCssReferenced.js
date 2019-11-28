@@ -4,7 +4,7 @@ import fs from 'fs';
 export function getIdsFromString(lineWithCss) {
     const idFound = lineWithCss.match(/(id="(.*?)("))|(id='(.*?)('))|(id=`(.*?)(`))/g);
     if (idFound !== null) {
-        return idFound.toString().substr(4, idFound.toString().length - 6);
+        return idFound.toString().substr(4, idFound.toString().length - 5);
     }
 }
 
@@ -17,21 +17,21 @@ export function getClassFromString(lineWithCss) {
 }
 
 export function getIdsReferencedInHtml(filePath) {
-    const ids = [];
+    let ids = [];
     fs.readFileSync(filePath, 'utf-8').split(/\r?\n/).forEach((line) => {
         if (getIdsFromString(line) !== undefined) {
-            ids.push(getIdsFromString(line));
+            ids = ids.concat(getIdsFromString(line));
         }
     });
     return ids;
 }
 
 export function getClassesReferencedInHtml(filePath) {
-    const classes = [];
+    let classes = [];
     fs.readFileSync(filePath, 'utf-8').split(/\r?\n/).forEach((line) => {
         const result = getClassFromString(line);
         if (result !== undefined) {
-            classes.push(result.split(' '));
+            classes = classes.concat(result.split(' '));
         }
     });
     return classes;
