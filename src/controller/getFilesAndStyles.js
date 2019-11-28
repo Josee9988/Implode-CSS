@@ -1,4 +1,4 @@
-let fs,path,readline,exitCodes;_c33‍.x([["getArrayHtmlPhpPaths",()=>getArrayHtmlPhpPaths],["findFilesInDir",()=>findFilesInDir],["getCssReferencedInHtml",()=>getCssReferencedInHtml],["getIdsFromString",()=>getIdsFromString]]);_c33‍.w("fs",[["default",["fs"],function(v){fs=v}]]);_c33‍.w("path",[["default",["path"],function(v){path=v}]]);_c33‍.w("readline",[["default",["readline"],function(v){readline=v}]]);_c33‍.w("./Exceptions/exitCodes",[["default",["exitCodes"],function(v){exitCodes=v}]]);/**
+/**
  * @file getFilesAndStyles contains all the functions which allow implodeCss to
  * get all the file paths that may contain CSS referenced styles such as .html
  * or .php, and also all the file paths that contains the styles itselfs .css.
@@ -8,10 +8,8 @@ let fs,path,readline,exitCodes;_c33‍.x([["getArrayHtmlPhpPaths",()=>getArrayHt
  * @link https://github.com/Josee9988/Implode-CSS
  */
 
-
-
-
-
+import fs from 'fs';
+import path from 'path';
 
 
 /**
@@ -21,9 +19,9 @@ let fs,path,readline,exitCodes;_c33‍.x([["getArrayHtmlPhpPaths",()=>getArrayHt
  * @param {String} folderToImplode path to the folder.
  * @return {Array} array with all the HTML and PHP files found in the directory
  */
-       function getArrayHtmlPhpPaths(folderToImplode) {
-    const htmlFiles = this.findFilesInDir(folderToImplode, '.html');
-    const phpFiles = this.findFilesInDir(folderToImplode, '.php');
+export function getArrayHtmlPhpPaths(folderToImplode) {
+    const htmlFiles = findFilesInDir(folderToImplode, '.html');
+    const phpFiles = findFilesInDir(folderToImplode, '.php');
     return htmlFiles.concat(phpFiles);
 }
 
@@ -35,7 +33,7 @@ let fs,path,readline,exitCodes;_c33‍.x([["getArrayHtmlPhpPaths",()=>getArrayHt
  * @param  {String} filter       Extension name, e.g: '.html' lowercase letters.
  * @return {Array}               Result files with absolute path in an array.
  */
-       function findFilesInDir(startPath, filter) {
+export function findFilesInDir(startPath, filter) {
     let results = [];
     const files = fs.readdirSync(startPath);
     for (let i = 0; i < files.length; i++) {
@@ -49,21 +47,4 @@ let fs,path,readline,exitCodes;_c33‍.x([["getArrayHtmlPhpPaths",()=>getArrayHt
     }
     // eslint-disable-next-line consistent-return
     return results;
-}
-
-       function getCssReferencedInHtml(filePath) {
-    let ids = [];
-    fs.readFileSync(filePath, 'utf-8').split(/\r?\n/).forEach((line) => {
-        if (this.getIdsFromString(line) !== undefined) {
-            ids.push(this.getIdsFromString(line));
-        }
-    });
-    _c33‍.g.console.log(ids);
-}
-
-       function getIdsFromString(lineWithCss) {
-    const idFound = lineWithCss.match(/(id="(.*?)(\"))|(id='(.*?)(\'))|(id=`(.*?)(\`))/g);
-    if (idFound !== null) {
-        return idFound.toString().substr(4, idFound.toString().length - 5);
-    }
 }

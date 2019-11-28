@@ -8,9 +8,14 @@
 
 import chalk from 'chalk';
 import exitCodes from './Exceptions/exitCodes';
-
-const getFilesAndStyles = require('./getFilesAndStyles');
-
+import {
+    getArrayHtmlPhpPaths,
+    findFilesInDir,
+} from './controller/getFilesAndStyles';
+import {
+    getIdsReferencedInHtml,
+    getClassesReferencedInHtml,
+} from './controller/getCssReferenced';
 
 /**
  * Summary: audirCode is the main function of auditing. It does not make any
@@ -22,8 +27,8 @@ const getFilesAndStyles = require('./getFilesAndStyles');
  * @return {void}
  */
 export async function auditCode(folderToImplode) {
-    const htmlPhpFiles = getFilesAndStyles.getArrayHtmlPhpPaths(folderToImplode);
-    const cssFiles = getFilesAndStyles.findFilesInDir(folderToImplode, '.css');
+    const htmlPhpFiles = getArrayHtmlPhpPaths(folderToImplode);
+    const cssFiles = findFilesInDir(folderToImplode, '.css');
 
     console.log(`Found: ${chalk.bold.yellow(htmlPhpFiles.length)} files that may contain references to CSS styles.`);
     console.log(`Found: ${chalk.bold.yellow(cssFiles.length)} files that contain CSS styles.\n`);
@@ -32,11 +37,14 @@ export async function auditCode(folderToImplode) {
     if (htmlPhpFiles.length === 0 || cssFiles.length === 0) {
         exitCodes(404);
     }
-
-    for (let i = 0; i < htmlPhpFiles.length; i++) { // TODO: make this work
-        console.log(getFilesAndStyles.getCssReferencedInHtml(htmlPhpFiles[i]));
+    let ids = [];
+    let classes = [];
+    for (let i = 0; i < htmlPhpFiles.length; i++) {
+        ids = ids.concat(getIdsReferencedInHtml(htmlPhpFiles[i]));
+        classes = classes.concat(getClassesReferencedInHtml(htmlPhpFiles[i]));
     }
-    // get the css:
+    console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML\\PHP files.`);
+    console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML\\PHP files.`);
 }
 
 /**

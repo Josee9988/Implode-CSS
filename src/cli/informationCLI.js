@@ -19,12 +19,12 @@ import version from '../../package.json';
  * @return {void}
  */
 export function showOptions(options) {
-    console.log(`Your ${chalk.yellow('options')} are:\n`);
-    process.stdout.write("Root folder to search CSS's, HTML's and PHP's: ");
+    console.log(`Your ${chalk.yellow('options')} are:`);
+    process.stdout.write(`    ${chalk.red('Root')}  Folder to search CSS's, HTML's and PHP's: `);
     console.log(chalk.bold.green(options.folderToImplode));
-    process.stdout.write('Audit (not performing any action, just showing the unused classes): ');
+    process.stdout.write(`    ${chalk.red('Audit')} Not performing any action, just showing the unused classes: `);
     console.log(chalk.bold.green(options.audit));
-    process.stdout.write('Fix (removed unused CSS ids and classes): ');
+    process.stdout.write(`    ${chalk.red('Fix')}   Remove unused CSS ids and classes: `);
     console.log(chalk.bold.green(options.fix) + chalk.white('\n'));
 }
 
