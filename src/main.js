@@ -18,11 +18,13 @@ import {
 } from './controller/getCssReferenced';
 import getUnusedCss from './controller/geCssUnused';
 
+
 /**
  * Summary: auditCode is the main function of auditing. It does not make any
  * modification or perform any specific task, it simply shows an output of the
  * unused styles. Simply shows a preview of what might be fixed.
  *
+ * @async
  * @param {string} folderToImplode rootFolder in which we will look
  * for unused CSS styles.
  * @return {void}
@@ -37,6 +39,7 @@ export async function auditCode(folderToImplode) {
  * modifications and fixes in order to remove all unused css styles. Also
  * it shows a little output of what has been fixed.
  *
+ * @async
  * @param {string} folderToImplode rootFolder in which we will look
  * for unused CSS styles.
  * @return {void}
@@ -51,6 +54,7 @@ export async function fixCode(folderToImplode) {
  * total files, total styles and total unused classes and then returns a 2D array with
  * the unused ids ([0]) and the unused classes ([1])
  *
+ * @async
  * @param {string} folderToImplode rootFolder in which we will look
  * for unused CSS styles.
  * @return {Array.<string[]>} 2D array with [0] = unused ids and [1] = unused classes.

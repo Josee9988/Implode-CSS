@@ -1,5 +1,25 @@
+/**
+ * @file getCssUnused is a file that contains all the functions that allows to get all the
+ * unused CSS styles.
+ *
+ * @author Jose Gracia Berenguer
+ * @since 1.0.0.
+ * @link https://github.com/Josee9988/Implode-CSS
+ */
+
 import fs from 'fs';
 
+/**
+ * Summary getUnusedCss receives all the css files, and all the ids and classes found from
+ * html files, then it looks if the styles are used, and returns a 2D array with the unused
+ * CSS selectors.
+ *
+ * @async
+ * @param {Array} cssFiles all css files to look for.
+ * @param {Array} idsFoundHTML all ids found from HTML files.
+ * @param {Array} classFoundHTML all classes found from HTML files.
+ * @return {Array.<string[]>} 2D array with [0] = unused ids and [1] = unused classes.
+ */
 export async function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
     let idsInCss = [];
     let classInCss = [];

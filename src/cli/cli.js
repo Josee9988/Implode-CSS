@@ -73,8 +73,8 @@ export async function cli(rawArgs) {
     }
     if (!options.help && !options.version) {
         options = await promptForMissingOptions(options);
-        testPath(options.folderToImplode);
         showOptions(options);
+        await testPath(options.folderToImplode);
 
         if (options.audit) { // if the user wants to audit
             await auditCode(options.folderToImplode);

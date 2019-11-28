@@ -13,20 +13,6 @@ import path from 'path';
 
 
 /**
- * Main function that gathers all the path to the files with extensions
- * HTML and PHP, and returns them as an array.
- *
- * @param {String} folderToImplode path to the folder.
- * @return {Array} array with all the HTML and PHP files found in the directory
- */
-export function getArrayHtmlPhpPaths(folderToImplode) {
-    const htmlFiles = findFilesInDir(folderToImplode, '.html');
-    const phpFiles = findFilesInDir(folderToImplode, '.php');
-    return htmlFiles.concat(phpFiles);
-}
-
-
-/**
  * Find all files recursively in specific folder with specific extension, e.g:
  * findFilesInDir('./src', '.html') => ['./src/a.html','./src/build/index.html']
  * @param  {String} startPath    Relative path to the root folder.
@@ -47,4 +33,18 @@ export function findFilesInDir(startPath, filter) {
     }
     // eslint-disable-next-line consistent-return
     return results;
+}
+
+
+/**
+ * Main function that gathers all the path to the files with extensions
+ * HTML and PHP, and returns them as an array.
+ *
+ * @param {String} folderToImplode path to the folder.
+ * @return {Array} array with all the HTML and PHP files found in the directory
+ */
+export function getArrayHtmlPhpPaths(folderToImplode) {
+    const htmlFiles = findFilesInDir(folderToImplode, '.html');
+    const phpFiles = findFilesInDir(folderToImplode, '.php');
+    return htmlFiles.concat(phpFiles);
 }

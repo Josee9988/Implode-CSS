@@ -15,10 +15,11 @@ import exitCodes from './Exceptions/exitCodes';
  * Summary: tesPath analyzes a path and checks if it has read, write and or
  * if it exists, if not it stops the process and shows an error to the user.
  *
+ * @async
  * @param {string} startPath path to test.
  * @return {void}
  */
-export function testPath(startPath) {
+export async function testPath(startPath) {
     // Directory exists
     if (!fs.existsSync(startPath)) {
         exitCodes(401, startPath);

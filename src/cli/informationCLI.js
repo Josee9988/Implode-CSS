@@ -18,7 +18,7 @@ import version from '../../package.json';
  * @param {object} options options selected by the user.
  * @return {void}
  */
-export function showOptions(options) {
+export async function showOptions(options) {
     console.log(`Your ${chalk.yellow('options')} are:`);
     process.stdout.write(`    ${chalk.red('Root')}  Folder to search CSS's, HTML's and PHP's: `);
     console.log(chalk.bold.green(options.folderToImplode));
