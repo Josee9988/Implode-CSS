@@ -44,8 +44,7 @@ export function runHttpServer() {
         const parsedUrl = url.parse(req.url);
 
         const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[/\\])+/, '');
-        let pathname = path.join(__dirname, sanitizePath);
-        pathname += '../public/index.html';
+        const pathname = path.join(__dirname, '/public', sanitizePath);
         fs.exists(pathname, (exist) => {
             if (!exist) {
                 // if the file is not found, return 404
@@ -58,7 +57,7 @@ export function runHttpServer() {
             fs.readFile(pathname, (err, data) => {
                 if (err) {
                     res.statusCode = 500;
-                    res.end(`Error getting the file: ${err}.`);
+                    res.end(`Error getting the file: ${err} at file ${pathname}.`);
                 } else {
                     // based on the URL path, extract the file extention. e.g. .js, .doc, ...
                     const {
@@ -72,8 +71,8 @@ export function runHttpServer() {
         });
     }).listen(parseInt(port, 10));
     console.log('  Server running at:');
-    console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://localhost:${port}`)}`);
-    console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://127.0.0.1:${port}`)}`);
+    console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://localhost:${port}/index.html`)}`);
+    console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://127.0.0.1:${port}/index.html`)}`);
 }
 
 export default runHttpServer;
