@@ -70,7 +70,7 @@ export function runHttpServer() {
             });
         });
     }).listen(parseInt(port, 10));
-    console.log('  Server running at:');
+    console.log('  Check your results at:');
     console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://localhost:${port}/index.html`)}`);
     console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://127.0.0.1:${port}/index.html`)}`);
 }

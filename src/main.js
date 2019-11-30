@@ -93,10 +93,9 @@ async function mainGetUnusedCss(folderToImplode) {
     console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML/PHP files.`);
     console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.\n`);
 
-    const unusedArray = await getUnusedCss(cssFiles, ids, classes);
-
-    console.log(`Found: ${chalk.bold.yellow(unusedArray[0].length)} total ${chalk.bold.red('UNUSED IDS')} in your project.`);
-    console.log(`Found: ${chalk.bold.yellow(unusedArray[1].length)} total ${chalk.bold.red('UNUSED CLASSES')} in your project.\n`);
+    const unusedArray = getUnusedCss(cssFiles, ids, classes);
+    //console.log(`Found: ${chalk.bold.yellow(unusedArray[0].length)} total ${chalk.bold.red('UNUSED IDS')} in your project.`);
+    //console.log(`Found: ${chalk.bold.yellow(unusedArray[1].length)} total ${chalk.bold.red('UNUSED CLASSES')} in your project.\n`);
 
     return unusedArray;
 }

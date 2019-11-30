@@ -20,7 +20,7 @@ import fs from 'fs';
  * @param {Array} classFoundHTML all classes found from HTML files.
  * @return {Array.<string[]>} 2D array with [0] = unused ids and [1] = unused classes.
  */
-export async function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
+export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
     let idsInCss = [];
     let classInCss = [];
     const unusedArray = [];
@@ -31,23 +31,45 @@ export async function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
     // Find all css and classes created (we do not know if they are used yet)
     for (let i = 0; i < cssFiles.length; i++) {
         const texto = fs.readFileSync(cssFiles[i], 'utf-8').split(/\r?\n/).join('');
-        idsInCss = idsInCss.concat(texto.match(/#-?[_a-zA-Z]+[_a-zA-Z0-9-]*(?=[^}]*\{)/g));
-        classInCss = classInCss.concat(texto.match(/\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*(?=[^}]*\{)/g));
+        idsInCss = idsInCss.concat({
+            css: texto.match(/#-?[_a-zA-Z]+[_a-zA-Z0-9-]*(?=[^}]*\{)/g),
+            path: cssFiles[i],
+        });
+        classInCss = classInCss.concat({
+            css: texto.match(/\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*(?=[^}]*\{)/g),
+            path: cssFiles[i],
+        });
     }
 
     // check if the ids are used if not add the Css selector to 'idsNotUsed'
-    for (let i = 0; i < idsInCss.length; i++) {
-        if (idsFoundHTML.indexOf(idsInCss[i].substr(1)) === -1) { // if it hasn't been used
-            idsNotUsed = idsNotUsed.concat(idsInCss[i]); // adds it to the array of unused
-        }
-    }
+    idsInCss.forEach((element) => {
+        const {
+            path,
+        } = element;
+        element.css.forEach((css) => {
+            if (idsFoundHTML.indexOf(css.substr(1)) === -1) { // if it hasn't been used
+                idsNotUsed = idsNotUsed.concat({
+                    css,
+                    path,
+                }); // adds it to the array of unused
+            }
+        });
+    });
 
     // check if the classes are used if not add the Css selector to 'classNotUsed'
-    for (let i = 0; i < classInCss.length; i++) {
-        if (classFoundHTML.indexOf(classInCss[i].substr(1)) === -1) { // if it hasn't been used
-            classNotUsed = classNotUsed.concat(classInCss[i]); // adds it to the array of unused
-        }
-    }
+    classInCss.forEach((element) => {
+        const {
+            path,
+        } = element;
+        element.css.forEach((css) => {
+            if (classFoundHTML.indexOf(css.substr(1)) === -1) { // if it hasn't been used
+                classNotUsed = classNotUsed.concat({
+                    css,
+                    path,
+                }); // adds it to the array of unused
+            }
+        });
+    });
 
     unusedArray.push(idsNotUsed, classNotUsed);
     return unusedArray;
