@@ -75,4 +75,15 @@ export function runHttpServer() {
     console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://127.0.0.1:${port}/index.html`)}`);
 }
 
+
+export function writeDataFile(unusedStyles) {
+    const pathname = path.join(__dirname, '../server/public/assets/js/data.js');
+    try {
+        fs.writeFileSync(pathname, `const contents = ${JSON.stringify(unusedStyles)}`);
+        return true;
+    } catch (err) {
+        return err;
+    }
+}
+
 export default runHttpServer;

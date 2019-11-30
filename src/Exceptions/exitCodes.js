@@ -43,29 +43,37 @@ export function showCodeAndExit(code, extraInformation = 'Not given') {
         case 401: // path does not exist
             console.error(`\n${chalk.bold.red('ERROR: ')}your path: '${chalk.bold.magenta(extraInformation)}' is wrong.`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 401')} - The given path does not exist.`);
-            console.error(`If you beleive this is our fault, please let us know at: ${
+            console.error(`If you believe this is our fault, please let us know at: ${
                 chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
             break;
 
         case 402: // path don't have read permissions
             console.error(`\n${chalk.bold.red('ERROR: ')}your path: '${chalk.bold.magenta(extraInformation)}' is wrong.`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 402')} - The given path does not have read permissions.`);
-            console.error(`If you beleive this is our fault, please let us know at: ${
+            console.error(`If you believe this is our fault, please let us know at: ${
                 chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
             break;
 
         case 403: // path don't have write permissions
             console.error(`\n${chalk.bold.red('ERROR: ')}your path: '${chalk.bold.magenta(extraInformation)}' is wrong.`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 403')} - The given path does not have write permissions.`);
-            console.error(`If you beleive this is our fault, please let us know at: ${
+            console.error(`If you believe this is our fault, please let us know at: ${
                 chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
             break;
 
         case 404: // not enough html or css files
             console.error(`\n${chalk.bold.red('ERROR: ')}there is not enough HTML or CSS files to look for unused files.`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 404')} - The given path does not contain enough HTML or CSS files.`);
-            console.error(`If you beleive this is our fault, please let us know at: ${
+            console.error(`If you believe this is our fault, please let us know at: ${
                 chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
+            break;
+        case 405:
+            console.error(`\n${chalk.bold.red('ERROR: ')}couldn't write data in a local file.`);
+            console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 405')} - Could not write data in a local file to output the unused CSS styles.`);
+            console.log(`More info: ${extraInformation}.`);
+            console.error(`If you believe this is our fault, please let us know at: ${
+                    chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
+
             break;
 
         default: // unknown error

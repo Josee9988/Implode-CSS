@@ -18,7 +18,10 @@ import {
 } from './controller/getCssReferenced';
 import getUnusedCss from './controller/geCssUnused';
 import testPathFile from './testPath';
-import server from './server/createServer';
+import {
+    runHttpServer,
+    writeDataFile,
+} from './server/createServer';
 
 
 /**
@@ -33,7 +36,11 @@ import server from './server/createServer';
  */
 export async function auditCode(folderToImplode) {
     const unusedStyles = await mainGetUnusedCss(folderToImplode);
-    server();
+    if (writeDataFile(unusedStyles) === true) {
+        runHttpServer();
+    } else {
+        exitCodes(405, writeDataFile(unusedStyles));
+    }
 }
 
 

@@ -1,0 +1,1 @@
+const contents = [["#feature","#feature","#feature","#accordion"],[".active",".jumbotron",".jumbotron",".jumbotron",".jumbotron",".app-btn",".jumbotron",".showcase-img",".jumbotron",".showcase-img",".show-img",".jumbotron",".app-btn",".jumbotron",".jumbotron",".jumbotron",".jumbotron",".watermelon"]]
