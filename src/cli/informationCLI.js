@@ -20,10 +20,11 @@ import version from '../../package.json';
  */
 export async function showOptions(options) {
     console.log(`Your ${chalk.yellow('options')} are:`);
-    console.log(`    ${chalk.cyan('Root')}  Folder to search CSS's, HTML's and PHP's: ${chalk.bold.green(options.folderToImplode)}`);
-    console.log(`    ${chalk.cyan('Audit')} Not performing any action, just showing the unused classes: ${chalk.bold.green(options.audit)}`);
-    console.log(`    ${chalk.cyan('Fix')}   Remove unused CSS ids and classes: ${chalk.bold.green(options.fix)}`);
-    console.log(`    ${chalk.cyan('Port')}   Port used for the server: ${`${chalk.bold.green(options.port)}\n`}`);
+    console.log(`    ${chalk.cyan('Root')}      Folder to search CSS's, HTML's and PHP's: ${chalk.bold.green(options.folderToImplode)}`);
+    console.log(`    ${chalk.cyan('Audit')}     Not performing any action, just showing the unused classes: ${chalk.bold.green(options.audit)}`);
+    console.log(`    ${chalk.cyan('Fix')}       Remove unused CSS ids and classes: ${chalk.bold.green(options.fix)}`);
+    console.log(`    ${chalk.cyan('Port')}      Port used for the server: ${`${chalk.bold.green(options.port)}`}`);
+    console.log(`    ${chalk.cyan('Ignored')}   Folders ignored: ${`${chalk.bold.green(options.ignore)}\n`}`);
 }
 
 /**
@@ -49,24 +50,25 @@ export function showHelp() {
     console.log(`\n${chalk.bold('Usage')}: implodeCss ${chalk.magenta('[folder] [options]\n')}`);
 
     console.log(chalk.bold('Global options:\n'));
-    console.log('  -y, --yes\t\tIgnore all options and use the default ones.');
-    console.log('  -a, --audit\t\tOutput unused CSS selectors.');
-    console.log('  -f, --fix\t\tFix unused CSS selectors and output the result.');
-    console.log('  -h, --help\t\tOutput usage information. (ignores all other arguments)');
-    console.log('  -v, --version\t\tOutput package version. (ignores all other arguments)');
-    console.log('  -p, --port\t\tPort of the server by default 4949. (>= 1024 and <= 65535)');
+    console.log('  -y, --yes\t\t  Ignore all options and use the default ones.');
+    console.log('  -a, --audit\t\t  Output unused CSS selectors.');
+    console.log('  -f, --fix\t\t  Fix unused CSS selectors and output the result.');
+    console.log('  -h, --help\t\t  Output usage information. (ignores all other arguments)');
+    console.log('  -v, --version\t\t  Output package version. (ignores all other arguments)');
+    console.log('  -p, --port\t\t  Port of the server by default 4949. (>= 1024 and <= 65535)');
+    console.log('  -i, --ignoreFolders\t  Ignore folders (add multiple folders name by separating them with commas)');
 
     console.log(chalk.bold('\nExamples of use:'));
     console.log('  implodeCss /var/www/html/myHost --fix -p 4848');
     console.log('  implodeCss . -a');
-
+    console.log('  implodeCss . -a -i src,public,tests,folderName');
 
     console.log(chalk.bold('\nHint:'));
     console.log(`  -If you do not know how to use the command, simply do: '${
         chalk.bold('ImplodeCss')}' (without arguments) and the package will prompt you the needed options.`);
     console.log(`  -You must use an ${chalk.bold('absolute path')} if you want to use it directly as an argument,
     ${chalk.bold('otherwise')} simply call the command ${chalk.bold('without a path')} and there you will be able to use ${chalk.bold('relative path')} from your actual path\n`);
-    console.log(`For more information: ${chalk.bold('https://github.com/Josee9988/Implode-CSS')}`);
+    console.log(`For more information visit: ${chalk.bold('https://github.com/Josee9988/Implode-CSS')}`);
 }
 
 

@@ -66,6 +66,7 @@ export async function promptForMissingOptions(options) {
         fix: options.fix && options.audit === false ? true : answers.action === 'fix',
         audit: options.audit && options.fix === false ? true : answers.action === 'audit',
         port: options.port >= 1024 && options.port <= 65535 ? options.port : 4949,
+        ignore: options.ignore ? options.ignore.split(',') : undefined,
     };
 }
 

@@ -17,7 +17,7 @@ import {
     getClassesReferencedInHtml,
 } from './controller/getCssReferenced';
 import getUnusedCss from './controller/geCssUnused';
-import testPathFile from './testPath';
+import testPathFile from './controller/testPath';
 import {
     runHttpServer,
     writeDataFile,
@@ -31,11 +31,13 @@ import {
  *
  * @async
  * @param {string} folderToImplode rootFolder in which we will look
+ * @param {Number} port port to run the server
+ * @param {Array} ignore all the folders to not look into
  * for unused CSS styles.
  * @return {void}
  */
-export async function auditCode(folderToImplode, port) {
-    const unusedStyles = await mainGetUnusedCss(folderToImplode);
+export async function auditCode(folderToImplode, port, ignore) {
+    const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
     if (writeDataFile(unusedStyles) === true) {
         runHttpServer(port).then(() => {
 
@@ -60,7 +62,8 @@ export async function auditCode(folderToImplode, port) {
  * @return {void}
  */
 export async function fixCode(folderToImplode, port) {
-    const unusedStyles = await mainGetUnusedCss(folderToImplode);
+    // const unusedStyles = await mainGetUnusedCss(folderToImplode);
+    console.log(chalk.red('Working on it. While we create this part, why don\'t you just analyze the data by using the \'audit\' option?'));
 }
 
 
@@ -71,12 +74,13 @@ export async function fixCode(folderToImplode, port) {
  *
  * @async
  * @param {string} folderToImplode rootFolder in which we will look
+ * @param {Array} ignore all the folders to not look into
  * for unused CSS styles.
  * @return {Array.<string[]>} 2D array with [0] = unused ids and [1] = unused classes.
  */
-async function mainGetUnusedCss(folderToImplode) {
-    const htmlPhpFiles = getArrayHtmlPhpPaths(folderToImplode);
-    const cssFiles = findFilesInDir(folderToImplode, '.css');
+async function mainGetUnusedCss(folderToImplode, ignore) {
+    const htmlPhpFiles = getArrayHtmlPhpPaths(folderToImplode, ignore);
+    const cssFiles = findFilesInDir(folderToImplode, '.css', ignore);
 
     console.log(`Found: ${chalk.bold.yellow(htmlPhpFiles.length)} files that may contain references to CSS styles. (.html/.php)`);
     console.log(`Found: ${chalk.bold.yellow(cssFiles.length)} files that contain CSS styles. (.css)\n`);
@@ -99,9 +103,6 @@ async function mainGetUnusedCss(folderToImplode) {
     console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.\n`);
 
     const unusedArray = getUnusedCss(cssFiles, ids, classes);
-    //console.log(`Found: ${chalk.bold.yellow(unusedArray[0].length)} total ${chalk.bold.red('UNUSED IDS')} in your project.`);
-    //console.log(`Found: ${chalk.bold.yellow(unusedArray[1].length)} total ${chalk.bold.red('UNUSED CLASSES')} in your project.\n`);
-
     return unusedArray;
 }
 

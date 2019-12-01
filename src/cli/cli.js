@@ -11,7 +11,7 @@ import arg from 'arg';
 import confirm from '@inquirer/confirm';
 import exitCodes from '../Exceptions/exitCodes';
 import promptForMissingOptions from './promptCLI';
-import testPath from '../testPath';
+import testPath from '../controller/testPath';
 import {
     auditCode,
     fixCode,
@@ -38,12 +38,14 @@ function parseArgumentsIntoOptions(rawArgs) {
         '--help': Boolean,
         '--version': Boolean,
         '--port': Number,
+        '--ignoreFolders': String,
         '-a': '--audit',
         '-f': '--fix',
         '-y': '--yes',
         '-h': '--help',
         '-v': '--version',
         '-p': '--port',
+        '-i': '--ignoreFolders',
     }, {
         argv: rawArgs.slice(2),
     });
@@ -54,6 +56,7 @@ function parseArgumentsIntoOptions(rawArgs) {
         help: args['--help'] || false,
         version: args['--version'] || false,
         port: args['--port'] || 4949,
+        ignore: args['--ignoreFolders'] || undefined,
         folderToImplode: args._[0],
     };
 }
@@ -78,9 +81,8 @@ export async function cli(rawArgs) {
         options = await promptForMissingOptions(options);
         showOptions(options);
         await testPath(options.folderToImplode);
-
         if (options.audit) { // if the user wants to audit
-            await auditCode(options.folderToImplode, options.port);
+            await auditCode(options.folderToImplode, options.port, options.ignore);
         } else if (options.fix) { // if the user wants to fix
             const answer = await confirm({
                 message: 'Do you want to fix your data, please do a backup first?',
