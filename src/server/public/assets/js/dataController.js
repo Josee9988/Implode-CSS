@@ -41,4 +41,10 @@ window.addEventListener('load', () => {
         tr.innerHTML = createUnusedTemplate(content.css, path);
         dataTable.appendChild(tr);
     });
+
+    // Remove the loader
+    document.getElementById('loader').classList.add('hidden');
+
+    // Show information about the results
+    document.getElementById('totalSelectors').innerText = `${unusedCss.length}`;
 });
