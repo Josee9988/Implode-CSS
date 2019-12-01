@@ -8,6 +8,8 @@
  */
 
 import fs from 'fs';
+import chalk from 'chalk';
+
 
 /**
  * Summary getUnusedCss receives all the css files, and all the ids and classes found from
@@ -46,6 +48,10 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
         const {
             path,
         } = element;
+        if (element.css === null) {
+            console.log(`${chalk.bgRed('Unconsistency')} - File: '${chalk.bold(path)}'. does not contain any CSS styles!`);
+            return false;
+        }
         element.css.forEach((css) => {
             if (idsFoundHTML.indexOf(css.substr(1)) === -1) { // if it hasn't been used
                 idsNotUsed = idsNotUsed.concat({
@@ -61,6 +67,10 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
         const {
             path,
         } = element;
+        if (element.css === null) {
+            console.log(`${chalk.bgRed('Unconsistency')} - File: '${chalk.bold(path)}'. does not contain any CSS styles!`);
+            return false;
+        }
         element.css.forEach((css) => {
             if (classFoundHTML.indexOf(css.substr(1)) === -1) { // if it hasn't been used
                 classNotUsed = classNotUsed.concat({

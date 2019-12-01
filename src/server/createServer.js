@@ -7,21 +7,19 @@
  */
 
 import chalk from 'chalk';
-
-const http = require('http');
-const url = require('url');
-const fs = require('fs');
-const path = require('path');
-
-const port = 4949;
+import http from 'http';
+import url from 'url';
+import fs from 'fs';
+import path from 'path';
 
 
 /**
  * Summary: runs an HTTP server in localhost.
  *
+ * @param {Number} port port to run the server, by default 4949.
  * @return {void}
  */
-export function runHttpServer() {
+export function runHttpServer(port = 4949) {
     const mimeType = {
         '.ico': 'image/x-icon',
         '.html': 'text/html',
@@ -70,12 +68,18 @@ export function runHttpServer() {
             });
         });
     }).listen(parseInt(port, 10));
-    console.log('  Check your results at:');
+    console.log('\n  Check your results at:');
     console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://localhost:${port}/index.html`)}`);
     console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://127.0.0.1:${port}/index.html`)}`);
 }
 
 
+/**
+ * Summary: Writes in a file all the data to be outputed in the index.html table.
+ *
+ * @param {Array} unusedStyles all the unused styles.
+ * @return {Boolean} True if all OK, else an error.
+ */
 export function writeDataFile(unusedStyles) {
     const pathname = path.join(__dirname, '../server/public/assets/js/data.js');
     try {
