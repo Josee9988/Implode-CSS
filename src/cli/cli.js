@@ -30,7 +30,7 @@ import {
  * @param {object} rawArgs arguments directly given by the user.
  * @return {object} options as a JavaScript object.
  */
-function parseArgumentsIntoOptions(rawArgs) {
+export function parseArgumentsIntoOptions(rawArgs) {
     const args = arg({
         '--audit': Boolean,
         '--fix': Boolean,
@@ -102,3 +102,5 @@ export async function cli(rawArgs) {
     // If the script hasn't stopped with any code, show a default exit output.
     // exitCodes(201);
 }
+
+export default cli;
