@@ -20,12 +20,10 @@ import version from '../../package.json';
  */
 export async function showOptions(options) {
     console.log(`Your ${chalk.yellow('options')} are:`);
-    process.stdout.write(`    ${chalk.red('Root')}  Folder to search CSS's, HTML's and PHP's: `);
-    console.log(chalk.bold.green(options.folderToImplode));
-    process.stdout.write(`    ${chalk.red('Audit')} Not performing any action, just showing the unused classes: `);
-    console.log(chalk.bold.green(options.audit));
-    process.stdout.write(`    ${chalk.red('Fix')}   Remove unused CSS ids and classes: `);
-    console.log(chalk.bold.green(options.fix) + chalk.white('\n'));
+    console.log(`    ${chalk.cyan('Root')}  Folder to search CSS's, HTML's and PHP's: ${chalk.bold.green(options.folderToImplode)}`);
+    console.log(`    ${chalk.cyan('Audit')} Not performing any action, just showing the unused classes: ${chalk.bold.green(options.audit)}`);
+    console.log(`    ${chalk.cyan('Fix')}   Remove unused CSS ids and classes: ${chalk.bold.green(options.fix)}`);
+    console.log(`    ${chalk.cyan('Port')}   Port used for the server: ${`${chalk.bold.green(options.port)}\n`}`);
 }
 
 /**
