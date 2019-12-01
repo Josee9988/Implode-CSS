@@ -34,10 +34,15 @@ import {
  * for unused CSS styles.
  * @return {void}
  */
-export async function auditCode(folderToImplode) {
+export async function auditCode(folderToImplode, port) {
     const unusedStyles = await mainGetUnusedCss(folderToImplode);
     if (writeDataFile(unusedStyles) === true) {
-        runHttpServer();
+        runHttpServer(port).then(() => {
+
+            })
+            .catch(() => {
+                exitCodes(501, port);
+            });
     } else {
         exitCodes(405, writeDataFile(unusedStyles));
     }
@@ -54,7 +59,7 @@ export async function auditCode(folderToImplode) {
  * for unused CSS styles.
  * @return {void}
  */
-export async function fixCode(folderToImplode) {
+export async function fixCode(folderToImplode, port) {
     const unusedStyles = await mainGetUnusedCss(folderToImplode);
 }
 

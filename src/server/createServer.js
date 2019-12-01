@@ -17,7 +17,7 @@ import path from 'path';
  * Summary: runs an HTTP server in localhost.
  *
  * @param {Number} port port to run the server, by default 4949.
- * @return {void}
+ * @return {Promise} if the server is created or not.
  */
 export function runHttpServer(port = 4949) {
     const mimeType = {
@@ -37,7 +37,7 @@ export function runHttpServer(port = 4949) {
         '.ttf': 'aplication/font-sfnt',
     };
 
-    http.createServer((req, res) => {
+    const server = http.createServer((req, res) => {
         // parse URL
         const parsedUrl = url.parse(req.url);
 
@@ -67,10 +67,18 @@ export function runHttpServer(port = 4949) {
                 }
             });
         });
-    }).listen(parseInt(port, 10));
-    console.log('\n  Check your results at:');
-    console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://localhost:${port}/index.html`)}`);
-    console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://127.0.0.1:${port}/index.html`)}`);
+    });
+    // eslint-disable-next-line no-new
+    return new Promise((resolve, reject) => {
+        server.listen(port, () => {
+            console.log('\n  Check your results at:');
+            console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://localhost:${port}/index.html`)}`);
+            console.log(`    - ${chalk.rgb(30, 170, 119).bold(`http://127.0.0.1:${port}/index.html`)}`);
+            resolve();
+        }).on('error', () => {
+            reject();
+        });
+    });
 }
 
 

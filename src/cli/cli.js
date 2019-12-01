@@ -37,11 +37,13 @@ function parseArgumentsIntoOptions(rawArgs) {
         '--yes': Boolean,
         '--help': Boolean,
         '--version': Boolean,
+        '--port': Number,
         '-a': '--audit',
         '-f': '--fix',
         '-y': '--yes',
         '-h': '--help',
         '-v': '--version',
+        '-p': '--port',
     }, {
         argv: rawArgs.slice(2),
     });
@@ -51,6 +53,7 @@ function parseArgumentsIntoOptions(rawArgs) {
         fix: args['--fix'] || false,
         help: args['--help'] || false,
         version: args['--version'] || false,
+        port: args['--port'] || 4949,
         folderToImplode: args._[0],
     };
 }
@@ -77,14 +80,14 @@ export async function cli(rawArgs) {
         await testPath(options.folderToImplode);
 
         if (options.audit) { // if the user wants to audit
-            await auditCode(options.folderToImplode);
+            await auditCode(options.folderToImplode, options.port);
         } else if (options.fix) { // if the user wants to fix
             const answer = await confirm({
                 message: 'Do you want to fix your data, please do a backup first?',
                 default: true,
             });
             if (answer === true) { // if the user wants to continue
-                await fixCode(options.folderToImplode);
+                await fixCode(options.folderToImplode, options.port);
             } else { // if the user cancelled the operation we will leave
                 exitCodes(200);
             }

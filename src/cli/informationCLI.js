@@ -56,9 +56,12 @@ export function showHelp() {
     console.log('  -f, --fix\t\tFix unused CSS selectors and output the result.');
     console.log('  -h, --help\t\tOutput usage information. (ignores all other arguments)');
     console.log('  -v, --version\t\tOutput package version. (ignores all other arguments)');
+    console.log('  -p, --port\t\tPort of the server by default 4949. (>= 1024 and <= 65535)');
 
-    console.log(chalk.bold('\nExample of use:'));
-    console.log('  implodeCss /var/www/html/myHost --fix');
+    console.log(chalk.bold('\nExamples of use:'));
+    console.log('  implodeCss /var/www/html/myHost --fix -p 4848');
+    console.log('  implodeCss . -a');
+
 
     console.log(chalk.bold('\nHint:'));
     console.log(`  -If you do not know how to use the command, simply do: '${
