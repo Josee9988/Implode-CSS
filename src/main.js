@@ -120,7 +120,7 @@ async function mainGetUnusedCss(folderToImplode, ignore) {
     }
 
     console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML/PHP files.`);
-    console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.`);
+    console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.\n`);
 
     const unusedArray = getUnusedCss(cssFiles, ids, classes);
     return unusedArray;
