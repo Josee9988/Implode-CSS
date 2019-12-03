@@ -22,6 +22,7 @@ import {
     runHttpServer,
     writeDataFile,
 } from './server/createServer';
+import removeUnused from './controller/fixCode';
 
 
 /**
@@ -61,9 +62,21 @@ export async function auditCode(folderToImplode, port, ignore) {
  * for unused CSS styles.
  * @return {void}
  */
-export async function fixCode(folderToImplode, port) {
-    // const unusedStyles = await mainGetUnusedCss(folderToImplode);
-    console.log(chalk.red('Working on it. While we create this part, why don\'t you just analyze the data by using the \'audit\' option?'));
+export async function fixCode(folderToImplode, port, ignore) {
+    const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
+    if (writeDataFile(unusedStyles) === true) {
+        const cssFiles = findFilesInDir(folderToImplode, '.css', ignore);
+        removeUnused(cssFiles, unusedStyles);
+        /* runHttpServer(port).then(() => {
+
+            })
+            .catch(() => {
+                exitCodes(501, port);
+            }); */
+    } else {
+        exitCodes(405, writeDataFile(unusedStyles));
+    }
+    // (?:^|}|\.|\#)\s*navbar\s*(\{|\:|\>|\s|\+|\~)([^}]*)}
 }
 
 

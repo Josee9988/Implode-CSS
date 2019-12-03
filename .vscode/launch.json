@@ -21,7 +21,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/bin/implodeCss.js",
-            "args": ["/YOURFILE/", "-f"], // Your path -f
+            "args": ["/home/joseg/Desktop/ddaw-ud3-a7-p1/", "-f"], // Your path -f
         },
     ]
 }
