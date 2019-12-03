@@ -1,16 +1,40 @@
+/**
+ * @file fixCode file that contains functions in order to fix the code (remove unused css selectors)
+ *
+ * @author Jose Gracia Berenguer
+ * @since 1.0.0.
+ * @link https://github.com/Josee9988/Implode-CSS
+ */
+
 import fs from 'fs';
 
-export default function removeUnused(cssFiles, styles) {
+
+/**
+ * Summary: function that removes from all the css files that contain unused css selectors
+ * looks for every unused css selector and removes it.
+ *
+ * @async
+ * @param {Array} cssFiles all the css files that contain unused css selectors.
+ * @param {Array} styles all the unused css classes and ids found.
+ * @return {boolean} true if all ok, if there is an error false.
+ */
+export default async function removeUnused(cssFiles, styles) {
     let fileReaded;
-    cssFiles.forEach((file) => {
-        fileReaded = fs.readFileSync(file, 'utf-8'); // reads the file
-        styles.forEach((stylesPath) => { // foreach of every path
-            stylesPath.forEach((styleToRemove) => { // gets every element with X.css and X.path
-                const regex = new RegExp(`(?:^|}|\\.|\\#)\\s*${styleToRemove.css.substr(1)}\\s*(\\{|\\:|\\>|\\s|\\+|\\~)([^}]*)}`);
-                fileReaded = fileReaded.replace(regex, '');
+    try {
+        cssFiles.forEach((file) => {
+            fileReaded = fs.readFileSync(file, 'utf-8'); // reads the file
+            styles.forEach((stylesPath) => { // foreach of every path
+                stylesPath.forEach((styleToRemove) => { // gets every element with X.css and X.path
+                    const regex = new RegExp(`(?:^|}|\\.|\\#)\\s*${styleToRemove.css.substr(1)}\\s*(\\{|\\:|\\>|\\s|\\+|\\~)([^}]*)}`);
+                    fileReaded = fileReaded.replace(regex, '');
+                });
             });
+            // writes in file and removes blank lines
+            fs.writeFileSync(file, fileReaded.replace(/^[ \t\n]*$/gm, ''));
         });
-        // writes in file and removes blank lines
-        fs.writeFileSync(file, fileReaded.replace(/^[ \t\n]*$/gm, ''));
-    });
+    } catch (err) {
+        console.log(`Error: ${err}`);
+        return false;
+    }
+    return true;
 }

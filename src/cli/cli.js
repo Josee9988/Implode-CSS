@@ -84,11 +84,10 @@ export async function cli(rawArgs) {
         if (options.audit) { // if the user wants to audit
             await auditCode(options.folderToImplode, options.port, options.ignore);
         } else if (options.fix) { // if the user wants to fix
-            const answer = true;
-            /*const answer = await confirm({
+            const answer = await confirm({
                 message: 'Do you want to fix your data, please do a backup first?',
                 default: true,
-            });*/
+            });
             if (answer === true) { // if the user wants to continue
                 await fixCode(options.folderToImplode, options.port, options.ignore);
             } else { // if the user cancelled the operation we will leave

@@ -41,7 +41,9 @@ export async function auditCode(folderToImplode, port, ignore) {
     const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
     if (writeDataFile(unusedStyles) === true) {
         runHttpServer(port).then(() => {
-
+                console.log(`\nAll unused selectors were ${chalk.bold.blueBright('successfully')} found.`);
+                console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
+                console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
             })
             .catch(() => {
                 exitCodes(501, port);
@@ -60,23 +62,28 @@ export async function auditCode(folderToImplode, port, ignore) {
  * @async
  * @param {string} folderToImplode rootFolder in which we will look
  * for unused CSS styles.
+ * @param {Array} ignore all the folders to not look into
+ * for unused CSS styles.
  * @return {void}
  */
 export async function fixCode(folderToImplode, port, ignore) {
     const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
     if (writeDataFile(unusedStyles) === true) {
         const cssFiles = findFilesInDir(folderToImplode, '.css', ignore);
-        removeUnused(cssFiles, unusedStyles);
-        /* runHttpServer(port).then(() => {
-
+        if (!removeUnused(cssFiles, unusedStyles)) { // if there is a mistake, shutdown the program
+            exitCodes(406);
+        }
+        runHttpServer(port).then(() => {
+                console.log(`\nAll unused selectors ${chalk.bold.blueBright('successfully')} removed.`);
+                console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
+                console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
             })
             .catch(() => {
                 exitCodes(501, port);
-            }); */
+            });
     } else {
         exitCodes(405, writeDataFile(unusedStyles));
     }
-    // (?:^|}|\.|\#)\s*navbar\s*(\{|\:|\>|\s|\+|\~)([^}]*)}
 }
 
 
@@ -113,7 +120,7 @@ async function mainGetUnusedCss(folderToImplode, ignore) {
     }
 
     console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML/PHP files.`);
-    console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.\n`);
+    console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.`);
 
     const unusedArray = getUnusedCss(cssFiles, ids, classes);
     return unusedArray;

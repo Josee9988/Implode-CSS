@@ -65,6 +65,11 @@ export function showCodeAndExit(code, extraInformation = 'Not given') {
             console.log(`More info: ${extraInformation}.`);
             break;
 
+        case 406:
+            console.error(`\n${chalk.bold.red('ERROR: ')}couldn't read or write data in order to fix your code.`);
+            console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 406')} - Could not write or read data, this error is unexpected, check your permissions, or post an issue.`);
+            break;
+
         case 501: // bad server
             console.error(`\n${chalk.bold.red('ERROR: ')}could not open the server with port: ${extraInformation}.`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 501')} - Permission denied at setting up the server in port ${extraInformation} to show the results.`);
