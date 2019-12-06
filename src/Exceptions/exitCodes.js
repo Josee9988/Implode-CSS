@@ -60,18 +60,18 @@ export function showCodeAndExit(code, extraInformation = 'Not given') {
             break;
 
         case 405: // not enough permissions to write data
-            console.error(`\n${chalk.bold.red('ERROR: ')}couldn't write data in a local file.`);
+            console.error(`\n${chalk.bold.red('ERROR: ')}couldn't write data in a local file, retry as a ${chalk.bold('sudo')} user.`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 405')} - Could not write data in a local file to output the unused CSS styles.`);
             console.log(`More info: ${extraInformation}.`);
             break;
 
         case 406:
-            console.error(`\n${chalk.bold.red('ERROR: ')}couldn't read or write data in order to fix your code.`);
+            console.error(`\n${chalk.bold.red('ERROR: ')}couldn't read or write data in order to fix your code , retry as a ${chalk.bold('sudo')} user..`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 406')} - Could not write or read data, this error is unexpected, check your permissions, or post an issue.`);
             break;
 
         case 501: // bad server
-            console.error(`\n${chalk.bold.red('ERROR: ')}could not open the server with port: ${extraInformation}.`);
+            console.error(`\n${chalk.bold.red('ERROR: ')}could not open the server with port: ${extraInformation}, retry as a ${chalk.bold('sudo')} user..`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 501')} - Permission denied at setting up the server in port ${extraInformation} to show the results.`);
             break;
 
