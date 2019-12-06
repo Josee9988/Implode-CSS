@@ -14,7 +14,7 @@ With `implodeCss` you will be able to **detect** and/or **remove** these unused 
 
 ---
 
-## **Installation**
+## **Installation** 🔩⚙
 
 ``` bash
 sudo npm install -g @josee9988/implode-css
@@ -22,7 +22,7 @@ sudo npm install -g @josee9988/implode-css
 
 ---
 
-## **How to use it**
+## **Examples of use** 📐🛡
 
 - If you do not know how to use the package use:
 
@@ -74,13 +74,17 @@ sudo npm install -g @josee9988/implode-css
 
 ## **Screenshots** 📸 😁
 
-- Auditing the code with `implodeCss . -a`
+- Auditing the code with: `implodeCss . -a`
 
 <img src="https://i.imgur.com/AnTvuHb.png" alt="auditing code" title="auditing code" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
 
 - Table with all the unused selectors
 
 <img src="https://i.imgur.com/wRXYHmG.png" alt="table with unused selectors" title="table with unused selectors" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
+
+- Help command: `implodeCss -h`
+
+<img src="https://i.imgur.com/dVof1Rx.png" alt="help command" title="help command" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
 
 - If you do not specify a folder...
 
