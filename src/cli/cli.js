@@ -85,7 +85,7 @@ export async function cli(rawArgs) {
             await auditCode(options.folderToImplode, options.port, options.ignore);
         } else if (options.fix) { // if the user wants to fix
             const answer = await confirm({
-                message: 'Do you want to fix your data, please do a backup first?',
+                message: 'Do you want to fix your data? Remember that this feature is beta and may not be perfect is some scenarios, please do a backup first',
                 default: true,
             });
             if (answer === true) { // if the user wants to continue
@@ -99,8 +99,6 @@ export async function cli(rawArgs) {
     } else if (options.version) { // if the user specified version
         showVersion();
     }
-    // If the script hasn't stopped with any code, show a default exit output.
-    // exitCodes(201);
 }
 
 export default cli;

@@ -29,8 +29,7 @@ body {
     align-items: center;
 }
 
-
-#loader.hidden {
+#loader.hidden { /* Used in the keyframes animation bellow */
     -webkit-animation: fadeOut 3s;
     animation: fadeOut 3s;
     -webkit-animation-fill-mode: both;
@@ -43,7 +42,6 @@ body {
         visibility: hidden;
     }
 }
-
 
 @keyframes fadeOut {
     100% {

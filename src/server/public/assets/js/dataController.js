@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */ /* eslint-disable prefer-spread */
 /**
  * @file dataController is a file that contains all the function that the index.html needs
  * in order to read the data from the file and print it to the table.
@@ -6,7 +7,7 @@
  * @since 1.0.0.
  * @link https://github.com/Josee9988/Implode-CSS
  */
-/* eslint-disable prefer-spread */
+
 
 /**
  * Summary: Function that receives an unused style and its path and then
@@ -29,22 +30,36 @@ function createUnusedTemplate(element, path) {
 }
 
 
-window.addEventListener('load', () => {
+/**
+ * Summary: finds its path, if it is an ID or a CLASS and the name of the css selector and 
+ * prints it in the main table.
+ *
+ * @async
+ * @param {Object} content with a path and a CSS selector.
+ * @return {void}
+ */
+async function createElementInTable(content) {
     const dataTable = document.getElementById('dataTable');
+    const {
+        path,
+    } = content;
+    const tr = document.createElement('tr');
+    tr.innerHTML = createUnusedTemplate(content.css, path);
+    dataTable.appendChild(tr);
+}
+
+
+window.addEventListener('load', () => {
     const unusedCss = [].concat.apply([], contents); // FROM 2D array to 1D
 
+    // Creates every element in the table asynchronously
     unusedCss.forEach((content) => {
-        const {
-            path,
-        } = content;
-        const tr = document.createElement('tr');
-        tr.innerHTML = createUnusedTemplate(content.css, path);
-        dataTable.appendChild(tr);
+        createElementInTable(content);
     });
 
-    // Remove the loader
+    // Remove the loader with an animation made in CSS.
     document.getElementById('loader').classList.add('hidden');
 
-    // Show information about the results
+    // Show information about the number of unused selectors found.
     document.getElementById('totalSelectors').innerText = `${unusedCss.length}`;
 });
