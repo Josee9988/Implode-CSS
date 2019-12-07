@@ -45,8 +45,8 @@ export async function auditCode(folderToImplode, port, ignore) {
                 console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
                 console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
             })
-            .catch(() => {
-                exitCodes(501, port);
+            .catch((err) => {
+                exitCodes(501, port, err);
             });
     } else {
         exitCodes(405, writeDataFile(unusedStyles));
@@ -78,8 +78,8 @@ export async function fixCode(folderToImplode, port, ignore) {
                 console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
                 console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
             })
-            .catch(() => {
-                exitCodes(501, port);
+            .catch((err) => {
+                exitCodes(501, port, err);
             });
     } else {
         exitCodes(405, writeDataFile(unusedStyles));

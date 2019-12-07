@@ -30,14 +30,14 @@ export async function testPath(startPath) {
     try {
         fs.accessSync(startPath, fs.constants.R_OK);
     } catch (err) {
-        exitCodes(402, startPath);
+        exitCodes(402, startPath, err);
     }
 
     // File read permissions
     try {
         fs.accessSync(startPath, fs.constants.W_OK);
     } catch (err) {
-        exitCodes(403, startPath);
+        exitCodes(403, startPath, err);
     }
 }
 

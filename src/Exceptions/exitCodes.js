@@ -21,7 +21,7 @@ import chalk from 'chalk';
  * make the error more understandable.
  * @return {void}
  */
-export function showCodeAndExit(code, extraInformation = 'Not given') {
+export function showCodeAndExit(code, extraInformation = 'Not given', errorTraces) {
     switch (code) {
         case 200: // exiting OK
             console.log(`\nExiting without errors, thanks for using ${chalk.green('implodeCss')}`);
@@ -87,7 +87,12 @@ export function showCodeAndExit(code, extraInformation = 'Not given') {
         console.error(`If you believe this is our fault, please let us know at: ${
             chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
     }
-    process.exit(code); // exists with the code given
+
+    if (errorTraces !== undefined) {
+        console.log(`More information about the error: ${chalk.gray(errorTraces)}.`);
+    }
+
+    process.exit(code); // exists with the code given without throwing an error.
 }
 
 export default showCodeAndExit;

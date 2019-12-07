@@ -1,6 +1,12 @@
+<!-- markdownlint-disable MD033-->
 # **Implode-CSS** 🌋💣
 
 Npm CLI package that removes all unused CSS *classes* and *ids* from your project.
+
+---
+
+[![Version](https://badge.fury.io/js/%40josee9988%2Fimplode-css.svg)](https://www.npmjs.com/package/@josee9988/implode-css)
+[![Downloads](https://img.shields.io/npm/dt/@josee9988/implode-css.svg)](https://www.npmjs.com/package/@josee9988/implode-css)
 
 ---
 

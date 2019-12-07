@@ -45,7 +45,7 @@ export function showVersion() {
  * @return {void}
  */
 export function showHelp() {
-    console.log(chalk.green('\nImplodeCss') + chalk.gray(` v${version.version()}`));
+    console.log(chalk.green('\nImplodeCss') + chalk.gray(` v${version.version}`));
 
     console.log(`\n${chalk.bold('Usage')}: implodeCss ${chalk.magenta('[folder] [options]\n')}`);
 

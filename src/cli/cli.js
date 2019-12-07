@@ -74,8 +74,9 @@ export async function cli(rawArgs) {
     let options;
     try {
         options = parseArgumentsIntoOptions(rawArgs);
-    } catch (error) {
-        exitCodes(400, rawArgs);
+    } catch (err) {
+        showHelp();
+        exitCodes(400, rawArgs, err);
     }
     if (!options.help && !options.version) {
         options = await promptForMissingOptions(options);
