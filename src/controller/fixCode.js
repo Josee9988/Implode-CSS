@@ -29,8 +29,10 @@ export default async function removeUnused(cssFiles, styles) {
                     fileReaded = fileReaded.replace(regex, '{}');
                 });
             });
-            // writes in file and removes blank lines
+            // Removes blank lines
             fs.writeFileSync(file, fileReaded.replace(/^[ \t\n]*$/gm, ''));
+            // Removes lines with only {}
+            fs.writeFileSync(file, fileReaded.replace(/^({)(})/gm, ''));
         });
     } catch (err) {
         console.log(`Error: ${err}`);

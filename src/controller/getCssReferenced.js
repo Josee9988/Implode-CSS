@@ -40,7 +40,7 @@ export function getClassFromString(lineWithCss) {
 
 
 /**
- * Summary: function that reads line by line the received path looks for ids in the line.
+ * Summary: a function that reads line by line the received path looks for ids in the line.
  *
  * @param {String} filePath path to read line by line.
  * @return {Array.String} array of found ids.
@@ -57,7 +57,7 @@ export function getIdsReferencedInHtml(filePath) {
 
 
 /**
- * Summary: function that reads line by line the received path looks for classes in the line.
+ * Summary: a function that reads line by line the received path looks for classes in the line.
  *
  * @param {String} filePath path to read line by line.
  * @return {Array.String} array of found classes.

@@ -12,11 +12,11 @@ import inquirer from 'inquirer';
 
 /**
  * Summary: promptForMissingOptions prompts the user for some the arguments
- * not passed which are neccessary in order to run the package, then returns
+ * not passed which are necessary to run the package, then returns
  * and object with the new options.
  *
  * @param {object} options arguments given by the user, if there are
- * some neccessary arguments to be filled, it will prompt the user for them.
+ * some necessary arguments to be filled, it will prompt the user for them.
  * @return {object} options with the new answers, if it did any.
  */
 export async function promptForMissingOptions(options) {

@@ -7,11 +7,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
+## [**1.0.3**] - 2019-12-07
+
+### Fixed
+
+* Some typographical errors.
+
+### Added
+
+* More keywords to the package.json file.
+* Documentation of the cliTest.js file.
+* When fixing the code, now it will remove empty lines and lines with only '{}'.
+
+### Changed
+
+* Description of the package.
+* Minnor text changes in the readme.md file.
+
 ## [**1.0.2**] - 2019-12-06
 
 ### Added
 
-* More screenshots to the readme.md
+* More screenshots to the readme.md file.
 
 ### Fixed
 

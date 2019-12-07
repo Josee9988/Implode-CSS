@@ -1,4 +1,13 @@
 /* eslint-disable no-undef */
+/**
+ * @file cliTest, contains all the tests.
+ *
+ * @author Jose Gracia Berenguer
+ * @since 1.0.0
+ * @link https://github.com/Josee9988/Implode-CSS
+ */
+
+
 import assert from 'assert';
 import {
     parseArgumentsIntoOptions,

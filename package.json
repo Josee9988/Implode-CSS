@@ -1,7 +1,7 @@
 {
   "name": "@josee9988/implode-css",
-  "version": "1.0.1",
-  "description": "package that removes all unused CSS classes and ids from a project",
+  "version": "1.0.3",
+  "description": "Removes or checks all unused CSS selectors (Classes and Ids) from a project",
   "main": "src/main.js",
   "bin": {
     "@josee9988/implodeCss": "bin/implodeCss.js",
@@ -12,7 +12,11 @@
   },
   "keywords": [
     "cli",
-    "implodeCss"
+    "implodeCss",
+    "css",
+    "implode",
+    "cleancss",
+    "remove unused css"
   ],
   "scripts": {
     "test": "mocha 'test/**' --require esm || true"

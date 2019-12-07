@@ -2,8 +2,8 @@
 
 /**
  * @file implodeCss is the root of the package, it is called from the
- * terminal, uses node in order to run, and it calles the function CLI,
- * from 'src/' and requires esm. Do not touch this file unless you know
+ * terminal, uses node to run, and it calls the function CLI,
+ * from 'src/' and requires 'esm'. Do not touch this file unless you know
  * what you are doing.
  *
  * @author Jose Gracia Berenguer

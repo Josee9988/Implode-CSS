@@ -1,5 +1,5 @@
 /**
- * @file cli contains the main commands to receive the raw arguments, interpret
+ * @file CLI contains the main commands to receive the raw arguments, interpret
  * it and then calls to the proper functions given by the user.
  *
  * @author Jose Gracia Berenguer
