@@ -60,9 +60,9 @@ export function showCodeAndExit(code, extraInformation = 'Not given', errorTrace
             break;
 
         case 405: // not enough permissions to write data
-            console.error(`\n${chalk.bold.red('ERROR: ')}couldn't write data in a local file, retry as a ${chalk.bold('sudo')} user.`);
+            console.error(`\n${chalk.bold.red('ERROR: ')}couldn't write data in a local file, ${chalk.bold.blue('retry as a sudo/administrator')} user.`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 405')} - Could not write data in a local file to output the unused CSS styles.`);
-            console.log(`More info: ${extraInformation}.`);
+            console.error(`More info: ${extraInformation}.`);
             break;
 
         case 406:
@@ -76,7 +76,7 @@ export function showCodeAndExit(code, extraInformation = 'Not given', errorTrace
             break;
 
         default: // unknown error 501
-            console.error(chalk.bold.red('\nUnknown error.'));
+            console.error(chalk.bold.red('\nUnknown error!'));
             console.error(`${chalk.bold.red('errno:') + chalk.bold(' 500')
                 } - Unexpected error code, you should never be reading this, please inform us how this happened at: ${
                 chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
@@ -89,7 +89,7 @@ export function showCodeAndExit(code, extraInformation = 'Not given', errorTrace
     }
 
     if (errorTraces !== undefined) {
-        console.log(`More information about the error: ${chalk.gray(errorTraces)}.`);
+        console.error(`More information about the error: ${chalk.gray(errorTraces)}.`);
     }
 
     process.exit(code); // exists with the code given without throwing an error.

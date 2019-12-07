@@ -21,6 +21,7 @@ import {
     showHelp,
     showVersion,
 } from './informationCLI';
+import createProcessesHandlers from '../Exceptions/processHandlers';
 
 
 /**
@@ -71,6 +72,7 @@ export function parseArgumentsIntoOptions(rawArgs) {
  * @return {void}
  */
 export async function cli(rawArgs) {
+    createProcessesHandlers();
     let options;
     try {
         options = parseArgumentsIntoOptions(rawArgs);
