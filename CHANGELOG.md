@@ -7,6 +7,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
+## [UNRELEASED]
+
+### Fixed
+
+* Minnor typos.
+
+### Removed
+
+* Removed folders .vscode and node_modules from Github.
+
+### Added
+
+* More tests.
+* Folder 'projectExampleForTests' inside the folder 'tests', that will contain a example project in order to do tests in it.
+
 ## [**1.1.0**] - 2019-12-07
 
 ### Added

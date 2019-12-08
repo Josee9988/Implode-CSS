@@ -31,7 +31,7 @@ function createUnusedTemplate(element, path) {
 
 
 /**
- * Summary: finds its path, if it is an ID or a CLASS and the name of the css selector and 
+ * Summary: finds its path, if it is an ID or a CLASS and the name of the css selector and
  * prints it in the main table.
  *
  * @async

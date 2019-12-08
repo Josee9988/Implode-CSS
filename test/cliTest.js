@@ -59,4 +59,12 @@ describe('Exceptions test suite for CLI - arguments', () => {
                 assert.deepStrictEqual(false, true);
             });
     });
+
+
+    it('Should use the port given', () => {
+        const rawArguments = ['/usr/local/bin/node', '/usr/local/bin/implodeCss', '.', '-a', '-p', '9999'];
+        let received = parseArgumentsIntoOptions(rawArguments);
+        assert.deepStrictEqual(received.port, 9999);
+        received = parseArgumentsIntoOptions(rawArguments);
+    });
 });

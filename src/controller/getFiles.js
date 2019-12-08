@@ -30,6 +30,7 @@ export function findFilesInDir(startPath, filter, ignore) {
         if (stat.isDirectory() && !filename.match(/node_modules/g) && !filename.match(/.git/g)) {
             if (ignore !== undefined) { // if there are ignored folders
                 let isIgnored = false;
+                // eslint-disable-next-line consistent-return
                 ignore.forEach((folder) => { // check every folder ignored by the user
                     if (filename.match(folder)) { // if the folder is one of the ignored...
                         isIgnored = true;

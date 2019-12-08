@@ -44,6 +44,7 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
     }
 
     // check if the ids are used if not add the Css selector to 'idsNotUsed'
+    // eslint-disable-next-line consistent-return
     idsInCss.forEach((element) => {
         const {
             path,
@@ -63,6 +64,7 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
     });
 
     // check if the classes are used if not add the Css selector to 'classNotUsed'
+    // eslint-disable-next-line consistent-return
     classInCss.forEach((element) => {
         const {
             path,
