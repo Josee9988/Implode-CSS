@@ -1,1 +1,0 @@
-const contents = [[{"css":"#realunusedId","path":"test/projectExampleForTests/css.css"}],[{"css":".unusedId","path":"test/projectExampleForTests/css.css"}]]

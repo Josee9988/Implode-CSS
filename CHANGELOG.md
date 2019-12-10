@@ -7,11 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
-## [UNRELEASED]
+## [**1.1.1**] - 2019-12-10
 
 ### Fixed
 
 * Minnor typos.
+* Files without any css/ids (unconsistencys) are now fixed and now it doesn't parse false positives.
 
 ### Removed
 

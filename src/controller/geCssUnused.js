@@ -50,7 +50,6 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
             path,
         } = element;
         if (element.css === null) {
-            console.log(`${chalk.bgRed('Unconsistency')} - File: '${chalk.bold(path)}'. does not contain any CSS styles!`);
             return false;
         }
         element.css.forEach((css) => {
@@ -70,7 +69,6 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
             path,
         } = element;
         if (element.css === null) {
-            console.log(`${chalk.bgRed('Unconsistency')} - File: '${chalk.bold(path)}'. does not contain any CSS styles!`);
             return false;
         }
         element.css.forEach((css) => {
@@ -82,6 +80,14 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
             }
         });
     });
+
+
+    // check for files without any CSS selector
+    for (let i = 0; i < classInCss.length; i++) {
+        if (classInCss[i].css === null && idsInCss[i].css === null) {
+            console.log(`${chalk.bgRed('Unconsistency')} - File: '${chalk.bold(classInCss[i].path)}'. does not contain any CSS styles!`);
+        }
+    }
 
     unusedArray.push(idsNotUsed, classNotUsed);
     return unusedArray;
