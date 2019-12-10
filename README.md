@@ -102,6 +102,12 @@ sudo npm install -g @josee9988/implode-css
 
 ---
 
+### **Upcoming features**
+
+- [ ] Make the project **usable by other packages**. Will probably come in version 1.2.
+
+---
+
 ### Did you enjoyed the package? Help us raise these numbers up 🥰 🎉
 
 [![Github followers](https://img.shields.io/github/followers/Josee9988.svg?style=social)](#did-you-enjoyed-the-package-help-us-raise-these-numbers-up--)

@@ -7,6 +7,7 @@
  */
 
 import chalk from 'chalk';
+import updateNotifier from 'update-notifier';
 import exitCodes from './Exceptions/exitCodes';
 import {
     getArrayHtmlPhpPaths,
@@ -23,6 +24,23 @@ import {
     writeDataFile,
 } from './server/createServer';
 import removeUnused from './controller/fixCode';
+import pkg from '../package.json';
+
+
+/**
+ * Summary: when we close the process it will show if there is an update available.
+ * @async
+ * @return {void}
+ */
+async function notify() {
+    updateNotifier({
+        pkg: {
+            name: pkg.name,
+            version: pkg.version,
+        },
+        updateCheckInterval: 1000 * 60 * 60 * 24, // every day
+    }).notify();
+}
 
 
 /**
@@ -37,6 +55,7 @@ import removeUnused from './controller/fixCode';
  * @return {Array.<string[]>} 2D array with [0] = unused ids and [1] = unused classes.
  */
 async function mainGetUnusedCss(folderToImplode, ignore) {
+    notify();
     const htmlPhpFiles = getArrayHtmlPhpPaths(folderToImplode, ignore);
     const cssFiles = findFilesInDir(folderToImplode, '.css', ignore);
 
@@ -78,7 +97,7 @@ async function mainGetUnusedCss(folderToImplode, ignore) {
  * @return {void}
  */
 export async function auditCode(folderToImplode, port, ignore) {
-    const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
+    const unusedStyles = mainGetUnusedCss(folderToImplode, ignore);
     if (writeDataFile(unusedStyles) === true) {
         runHttpServer(port).then(() => {
                 console.log(`\nAll unused selectors were ${chalk.bold.blueBright('successfully')} found.`);
@@ -107,7 +126,7 @@ export async function auditCode(folderToImplode, port, ignore) {
  * @return {void}
  */
 export async function fixCode(folderToImplode, port, ignore) {
-    const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
+    const unusedStyles = mainGetUnusedCss(folderToImplode, ignore);
     if (writeDataFile(unusedStyles) === true) {
         const cssFiles = findFilesInDir(folderToImplode, '.css', ignore);
         if (!removeUnused(cssFiles, unusedStyles)) { // if there is a mistake, shutdown the program

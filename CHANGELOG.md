@@ -7,6 +7,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
+## [**1.1.2**] - 2019-12-10
+
+### Added
+
+* Update-notifier, to see when a new version is out.
+
+### Fixed
+
+* Removed URLS when finding styles to avoid false positives.
+
 ## [**1.1.1**] - 2019-12-10
 
 ### Fixed

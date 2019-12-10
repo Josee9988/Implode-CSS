@@ -32,7 +32,9 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
 
     // Find all css and classes created (we do not know if they are used yet)
     for (let i = 0; i < cssFiles.length; i++) {
-        const texto = fs.readFileSync(cssFiles[i], 'utf-8').split(/\r?\n/).join('');
+        const texto = fs.readFileSync(cssFiles[i], 'utf-8').split(/\r?\n/).join('')
+            // remove all the urls to avoid false positives with urls
+            .replace(/[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g, '');
         idsInCss = idsInCss.concat({
             css: texto.match(/#-?[_a-zA-Z]+[_a-zA-Z0-9-]*(?=[^}]*\{)/g),
             path: cssFiles[i],
