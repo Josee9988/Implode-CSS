@@ -5,7 +5,8 @@
  *
  * @author Jose Gracia Berenguer
  * @since 1.0.0.
- * @link https://github.com/Josee9988/Implode-CSS
+ * @link https://github.com/Josee9988/Implode-CSS repository.
+ * @link https://github.com/Josee9988/Implode-CSS/issues issues or enhancements.
  */
 
 
