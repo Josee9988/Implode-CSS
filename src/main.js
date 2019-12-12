@@ -98,7 +98,8 @@ async function mainGetUnusedCss(folderToImplode, ignore) {
  * @return {void}
  */
 export async function auditCode(folderToImplode, port, ignore) {
-    const unusedStyles = mainGetUnusedCss(folderToImplode, ignore);
+    // await is Necessary
+    const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
     if (writeDataFile(unusedStyles) === true) {
         runHttpServer(port).then(() => {
                 console.log(`\nAll unused selectors were ${chalk.bold.blueBright('successfully')} found.`);
@@ -127,7 +128,8 @@ export async function auditCode(folderToImplode, port, ignore) {
  * @return {void}
  */
 export async function fixCode(folderToImplode, port, ignore) {
-    const unusedStyles = mainGetUnusedCss(folderToImplode, ignore);
+    // await is Necessary
+    const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
     if (writeDataFile(unusedStyles) === true) {
         const cssFiles = findFilesInDir(folderToImplode, '.css', ignore);
         if (!removeUnused(cssFiles, unusedStyles)) { // if there is a mistake, shutdown the program
