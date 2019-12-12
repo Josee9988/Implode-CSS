@@ -91,23 +91,20 @@ async function mainGetUnusedCss(folderToImplode, ignore) {
  * unused styles. Simply shows a preview of what might be fixed.
  *
  * @async
- * @param {string} folderToImplode rootFolder in which we will look
- * @param {Number} port port to run the server
- * @param {Array} ignore all the folders to not look into
- * for unused CSS styles.
+ * @param {Object} options object with all the options.
  * @return {void}
  */
-export async function auditCode(folderToImplode, port, ignore) {
+export async function auditCode(options) {
     // await is Necessary
-    const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
+    const unusedStyles = await mainGetUnusedCss(options.folderToImplode, options.ignore);
     if (writeDataFile(unusedStyles) === true) {
-        runHttpServer(port).then(() => {
+        runHttpServer(options.port).then(() => {
                 console.log(`\nAll unused selectors were ${chalk.bold.blueBright('successfully')} found.`);
                 console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
                 console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
             })
             .catch((err) => {
-                exitCodes(501, port, err);
+                exitCodes(501, options.port, err);
             });
     } else {
         exitCodes(405, writeDataFile(unusedStyles));
@@ -121,27 +118,24 @@ export async function auditCode(folderToImplode, port, ignore) {
  * it shows a little output of what has been fixed.
  *
  * @async
- * @param {string} folderToImplode rootFolder in which we will look
- * for unused CSS styles.
- * @param {Array} ignore all the folders to not look into
- * for unused CSS styles.
+ * @param {Object} options object with all the options.
  * @return {void}
  */
-export async function fixCode(folderToImplode, port, ignore) {
+export async function fixCode(options) {
     // await is Necessary
-    const unusedStyles = await mainGetUnusedCss(folderToImplode, ignore);
+    const unusedStyles = await mainGetUnusedCss(options.folderToImplode, options.ignore);
     if (writeDataFile(unusedStyles) === true) {
-        const cssFiles = findFilesInDir(folderToImplode, '.css', ignore);
+        const cssFiles = findFilesInDir(options.folderToImplode, '.css', options.ignore);
         if (!removeUnused(cssFiles, unusedStyles)) { // if there is a mistake, shutdown the program
             exitCodes(406);
         }
-        runHttpServer(port).then(() => {
+        runHttpServer(options.port).then(() => {
                 console.log(`\nAll unused selectors ${chalk.bold.blueBright('successfully')} found and fixed.`);
                 console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
                 console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
             })
             .catch((err) => {
-                exitCodes(501, port, err);
+                exitCodes(501, options.port, err);
             });
     } else {
         exitCodes(405, writeDataFile(unusedStyles));

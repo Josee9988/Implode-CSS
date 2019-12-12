@@ -86,14 +86,14 @@ export async function cli(rawArgs) {
         showOptions(options);
         await testPath(options.folderToImplode);
         if (options.audit) { // if the user wants to audit
-            await auditCode(options.folderToImplode, options.port, options.ignore);
+            await auditCode(options);
         } else if (options.fix) { // if the user wants to fix
             const answer = await confirm({
                 message: 'Do you want to fix your data? Remember that this feature is beta and may not be perfect is some scenarios, please do a backup first',
                 default: true,
             });
             if (answer === true) { // if the user wants to continue
-                await fixCode(options.folderToImplode, options.port, options.ignore);
+                await fixCode(options);
             } else { // if the user cancelled the operation we will leave
                 exitCodes(200);
             }

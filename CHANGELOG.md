@@ -7,6 +7,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
+[UNRELEASED]
+
+### Fixed
+
+* Npm run tests, now it only triggers the cliTest file.
+
+### Changed
+
+* Audit and Fix code from the main.js file will receive an object of options instead of the options itself.
+
 ## [**1.1.3**] - 2019-12-12
 
 ### Fixed
