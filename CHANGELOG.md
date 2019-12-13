@@ -7,6 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
+[UNRELEASED]
+
+### Fixed
+
+* If the server finds an error, it will now show an error, as before wasn't showing the error.
+* If the server finds an error, it will try to close it in an expected way before showing the error.
+
 ## [**1.2.0**] - 2019-12-13
 
 ### Added
