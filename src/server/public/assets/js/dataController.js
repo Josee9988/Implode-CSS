@@ -40,22 +40,27 @@ function createUnusedTemplate(element, path) {
  * @return {void}
  */
 async function createElementInTable(content) {
-    const dataTable = document.getElementById('dataTable');
     const {
         path,
     } = content;
     const tr = document.createElement('tr');
     tr.innerHTML = createUnusedTemplate(content.css, path);
-    dataTable.appendChild(tr);
+    document.getElementById('dataTable').appendChild(tr);
 }
 
 
 window.addEventListener('load', () => {
+    const emptyCssFiles = [];
     const unusedCss = [].concat.apply([], contents); // FROM 2D array to 1D
 
     // Creates every element in the table asynchronously
     unusedCss.forEach((content) => {
-        createElementInTable(content);
+        if (content.emptyFiles) {
+            emptyCssFiles.push(content.emptyFiles);
+            document.getElementById('emptyCss').innerHTML += `<li class="list-group-item list-group-item-action"><b>${content.emptyFiles}</b></li>`;
+        } else {
+            createElementInTable(content);
+        }
     });
 
     // Remove the loader with an animation made in CSS.
@@ -63,4 +68,7 @@ window.addEventListener('load', () => {
 
     // Show information about the number of unused selectors found.
     document.getElementById('totalSelectors').innerText = `${unusedCss.length}`;
+
+    // Show the number of files that are not used:
+    document.getElementById('emptyLength').innerText = emptyCssFiles.length;
 });

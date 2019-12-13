@@ -7,7 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
-[UNRELEASED]
+## [**1.2.0**] - 2019-12-13
+
+### Added
+
+* Result's page now it will also show the number of empty CSS files and their paths.
 
 ### Fixed
 
@@ -16,6 +20,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 
 * Audit and Fix code from the main.js file will receive an object of options instead of the options itself.
+* Look of the headers of the result's page.
+* Image of the result's page in the readme.md file.
 
 ## [**1.1.3**] - 2019-12-12
 

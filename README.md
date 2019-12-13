@@ -84,9 +84,9 @@ sudo npm install -g @josee9988/implode-css
 
 <img src="https://i.imgur.com/AnTvuHb.png" alt="auditing code" title="auditing code" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
 
-- **Table** with all the unused selectors
+- **Table** with all the unused selectors and more information.
 
-<img src="https://i.imgur.com/wRXYHmG.png" alt="table with unused selectors" title="table with unused selectors" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
+<img src="https://i.imgur.com/h2TFAEU.png" alt="table with unused selectors" title="table with unused selectors" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
 
 - **Help** command: `implodeCss -h`
 

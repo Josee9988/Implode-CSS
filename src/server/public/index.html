@@ -24,6 +24,7 @@
 
 <body>
 
+
   <!-- Loader, it will ocupy all the page while all the data is loaded and printed -->
   <div id="loader" class="text-center">
     <!-- If the user doesn't have JavaScript enabled show a warning -->
@@ -38,13 +39,19 @@
     <h3>Thanks for using ImplodeCss</h3>
   </div>
 
-  <!-- Top of page headers -->
-  <div class="text-center">
-    <h1>ImplodeCss information page</h1>
-    <h2>Unused CSS styles</h2>
+
+  <!-- Jumbotrón | Top of page headers-->
+  <div class="jumbotron">
+    <h1><b>ImplodeCss information page</b></h1>
+    <h2 class="text-center">Unused CSS styles and more!</h2>
   </div>
 
+
   <p>Total unused selectors found: <b><span id="totalSelectors"></span></b>.</p>
+  <p>Files that does not contain any CSS styles or are empty: <b><span id="emptyLength"></span></b></p>
+  <ul class="list-group" id="emptyCss">
+    <!-- Empty CSS files will go here -->
+  </ul>
 
   <hr>
 
