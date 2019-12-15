@@ -9,10 +9,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 [UNRELEASED]
 
+### Added
+
+* More information about the author in the package.json file.
+* Funding link in the package.json file.
+
 ### Fixed
 
 * If the server finds an error, it will now show an error, as before wasn't showing the error.
 * If the server finds an error, it will try to close it in an expected way before showing the error.
+* The extension will only show if there is a new version, if the user invokes the command implodeCss.
+* Some typos.
 
 ## [**1.2.0**] - 2019-12-13
 
@@ -50,8 +57,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Fixed
 
-* Minnor typos.
-* Files without any css/ids (unconsistencys) are now fixed and now it doesn't parse false positives.
+* Minor typos.
+* Files without any css/ids (inconsistency) are now fixed and now it doesn't parse false positives.
 
 ### Removed
 
@@ -60,7 +67,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 * More tests.
-* Folder 'projectExampleForTests' inside the folder 'tests', that will contain a example project in order to do tests in it.
+* Folder 'projectExampleForTests' inside the folder 'tests', that will contain an example project in order to do tests in it.
 
 ## [**1.1.0**] - 2019-12-07
 
@@ -72,7 +79,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Fixed
 
-* Show information throwed an error.
+* Show information threw an error.
 
 ### Added
 
@@ -103,7 +110,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 
 * Description of the package.
-* Minnor text changes in the readme.md file.
+* Minor text changes in the readme.md file.
 
 ## [**1.0.2**] - 2019-12-06
 

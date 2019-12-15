@@ -10,6 +10,7 @@
 
 import arg from 'arg';
 import confirm from '@inquirer/confirm';
+import notifyForUpdates from './notifyForUpdates';
 import exitCodes from '../Exceptions/exitCodes';
 import promptForMissingOptions from './promptCLI';
 import testPath from '../controller/testPath';
@@ -74,6 +75,7 @@ export function parseArgumentsIntoOptions(rawArgs) {
  */
 export async function cli(rawArgs) {
     createProcessesHandlers();
+    notifyForUpdates();
     let options;
     try {
         options = parseArgumentsIntoOptions(rawArgs);
