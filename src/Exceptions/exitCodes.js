@@ -75,13 +75,16 @@ export function showCodeAndExit(code, extraInformation = 'Not given', errorTrace
             console.error(`\n${chalk.bold.red('ERROR: ')}could not open the server with port: ${extraInformation}, retry as a ${chalk.bold('sudo')} user..`);
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 501')} - Permission denied at setting up the server in port ${extraInformation} to show the results.`);
             break;
+        case 502:
+            console.error(chalk.bold.red('\nNot expected error!'));
+            console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 502')} - Not expected error, happened in main process.`);
+            break;
 
         default: // unknown error 501
             console.error(chalk.bold.red('\nUnknown error!'));
             console.error(`${chalk.bold.red('errno:') + chalk.bold(' 500')
                 } - Unexpected error code, you should never be reading this, please inform us how this happened at: ${
                 chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
-            process.exit('500');
             break;
     }
     if (code >= 400) {

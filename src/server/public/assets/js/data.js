@@ -1,0 +1,1 @@
+const contents = [[{"css":"#myId","path":"test/projectExampleForTests/css.css"},{"css":"#realunusedId","path":"test/projectExampleForTests/css.css"}],[{"css":".super","path":"test/projectExampleForTests/css.css"},{"css":".unusedId","path":"test/projectExampleForTests/css.css"}],[{"emptyFiles":"test/projectExampleForTests/emptyCss.css"}]]

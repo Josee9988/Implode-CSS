@@ -13,17 +13,14 @@ import confirm from '@inquirer/confirm';
 import notifyForUpdates from './notifyForUpdates';
 import exitCodes from '../Exceptions/exitCodes';
 import promptForMissingOptions from './promptCLI';
-import testPath from '../controller/testPath';
-import {
-    auditCode,
-    fixCode,
-} from '../main';
 import {
     showOptions,
     showHelp,
     showVersion,
 } from './informationCLI';
 import createProcessesHandlers from '../Exceptions/processHandlers';
+
+const ImplodeCssClass = require('../main');
 
 
 /**
@@ -83,19 +80,20 @@ export async function cli(rawArgs) {
         showHelp();
         exitCodes(400, rawArgs, err);
     }
+    const ImplodeCss = new ImplodeCssClass(options);
+
     if (!options.help && !options.version) {
         options = await promptForMissingOptions(options);
         showOptions(options);
-        await testPath(options.folderToImplode);
         if (options.audit) { // if the user wants to audit
-            await auditCode(options);
+            ImplodeCss.auditCode(options);
         } else if (options.fix) { // if the user wants to fix
             const answer = await confirm({
                 message: 'Do you want to fix your data? Remember that this feature is beta and may not be perfect is some scenarios, please do a backup first',
                 default: true,
             });
             if (answer === true) { // if the user wants to continue
-                await fixCode(options);
+                ImplodeCss.fixCode(options);
             } else { // if the user cancelled the operation we will leave
                 exitCodes(200);
             }

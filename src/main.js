@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /**
  * @file main.js, it includes the logic of the package
  *
@@ -8,6 +9,10 @@
  */
 
 import chalk from 'chalk';
+import {
+    testPath,
+    testPathFile,
+} from './controller/testPath';
 import exitCodes from './Exceptions/exitCodes';
 import {
     getArrayHtmlPhpPaths,
@@ -18,7 +23,6 @@ import {
     getClassesReferencedInHtml,
 } from './controller/getCssReferenced';
 import getUnusedCss from './controller/geCssUnused';
-import testPathFile from './controller/testPath';
 import {
     runHttpServer,
     writeDataFile,
@@ -26,102 +30,113 @@ import {
 import removeUnused from './controller/fixCode';
 
 
-/**
- * Summary: mainGetUnusedCss called by fixCode and auditCode, shows an output of all the
- * total files, total styles and total unused classes and then returns a 2D array with
- * the unused ids ([0]) and the unused classes ([1])
- *
- * @async
- * @param {string} folderToImplode rootFolder in which we will look
- * @param {Array} ignore all the folders to not look into
- * for unused CSS styles.
- * @return {Array.<string[]>} 2D array with [0] = unused ids and [1] = unused classes.
- */
-async function mainGetUnusedCss(folderToImplode, ignore) {
-    const htmlPhpFiles = getArrayHtmlPhpPaths(folderToImplode, ignore);
-    const cssFiles = findFilesInDir(folderToImplode, '.css', ignore);
-
-    console.log(`Found: ${chalk.bold.yellow(htmlPhpFiles.length)} files that may contain references to CSS styles. (.html/.php)`);
-    console.log(`Found: ${chalk.bold.yellow(cssFiles.length)} files that contain CSS styles. (.css)\n`);
-
-    // if there is not enough files to look for.
-    if (htmlPhpFiles.length === 0 || cssFiles.length === 0) {
-        exitCodes(404);
+module.exports = class ImplodeCssClass {
+    constructor(options = {}) {
+        this.options = options;
+        this.options.audit = options.audit || false;
+        this.options.fix = options.fix || false;
+        this.options.port = options.port || 4949;
+        this.options.ignore = options.ignore || undefined;
+        this.options.folderToImplode = options.folderToImplode || undefined;
+        testPath(options.folderToImplode);
     }
 
-    // Find ids and classes in the HTML/PHP files
-    let ids = [];
-    let classes = [];
-    for (let i = 0; i < htmlPhpFiles.length; i++) {
-        testPathFile(htmlPhpFiles[i]); // test RW permissions.
-        ids = ids.concat(getIdsReferencedInHtml(htmlPhpFiles[i]));
-        classes = classes.concat(getClassesReferencedInHtml(htmlPhpFiles[i]));
-    }
 
-    console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML/PHP files.`);
-    console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.\n`);
+    /**
+     * Summary: mainGetUnusedCss called by fixCode and auditCode, shows an output of all the
+     * total files, total styles and total unused classes and then returns a 2D array with
+     * the unused ids ([0]) and the unused classes ([1])
+     *
+     * @async
+     * @param {string} folderToImplode rootFolder in which we will look
+     * @param {Array} ignore all the folders to not look into
+     * for unused CSS styles.
+     * @return {Array.<string[]>} 2D array with [0] = unused ids and [1] = unused classes.
+     */
+    async mainGetUnusedCss() {
+        // eslint-disable-next-line max-len
+        const htmlPhpFiles = getArrayHtmlPhpPaths(this.options.folderToImplode, this.options.ignore);
+        const cssFiles = findFilesInDir(this.options.folderToImplode, '.css', this.options.ignore);
 
-    const unusedArray = getUnusedCss(cssFiles, ids, classes);
-    return unusedArray;
-}
+        console.log(`Found: ${chalk.bold.yellow(htmlPhpFiles.length)} files that may contain references to CSS styles. (.html/.php)`);
+        console.log(`Found: ${chalk.bold.yellow(cssFiles.length)} files that contain CSS styles. (.css)\n`);
 
-
-/**
- * Summary: auditCode is the main function of auditing. It does not make any
- * modification or perform any specific task, it simply shows an output of the
- * unused styles. Simply shows a preview of what might be fixed.
- *
- * @async
- * @param {Object} options object with all the options.
- * @return {void}
- */
-export async function auditCode(options) {
-    // await is Necessary
-    const unusedStyles = await mainGetUnusedCss(options.folderToImplode, options.ignore);
-    if (writeDataFile(unusedStyles) === true) {
-        runHttpServer(options.port).then(() => {
-                console.log(`\nAll unused selectors were ${chalk.bold.blueBright('successfully')} found.`);
-                console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
-                console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
-            })
-            .catch((err) => {
-                exitCodes(501, options.port, err);
-            });
-    } else {
-        exitCodes(405, writeDataFile(unusedStyles));
-    }
-}
-
-
-/**
- * Summary: fixCode is the main function of fixing. It does make all the
- * modifications and fixes in order to remove all unused css styles. Also
- * it shows a little output of what has been fixed.
- *
- * @async
- * @param {Object} options object with all the options.
- * @return {void}
- */
-export async function fixCode(options) {
-    // await is Necessary
-    const unusedStyles = await mainGetUnusedCss(options.folderToImplode, options.ignore);
-    if (writeDataFile(unusedStyles) === true) {
-        const cssFiles = findFilesInDir(options.folderToImplode, '.css', options.ignore);
-        if (!removeUnused(cssFiles, unusedStyles)) { // if there is a mistake, shutdown the program
-            exitCodes(406);
+        // if there is not enough files to look for.
+        if (htmlPhpFiles.length === 0 || cssFiles.length === 0) {
+            exitCodes(404);
         }
-        runHttpServer(options.port).then(() => {
+
+        // Find ids and classes in the HTML/PHP files
+        let ids = [];
+        let classes = [];
+        for (let i = 0; i < htmlPhpFiles.length; i++) {
+            testPathFile(htmlPhpFiles[i]); // test RW permissions.
+            ids = ids.concat(getIdsReferencedInHtml(htmlPhpFiles[i]));
+            classes = classes.concat(getClassesReferencedInHtml(htmlPhpFiles[i]));
+        }
+
+        console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML/PHP files.`);
+        console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.\n`);
+
+        const unusedArray = getUnusedCss(cssFiles, ids, classes);
+        return unusedArray;
+    }
+
+
+    /**
+     * Summary: auditCode is the main function of auditing. It does not make any
+     * modification or perform any specific task, it simply shows an output of the
+     * unused styles. Simply shows a preview of what might be fixed.
+     *
+     * @async
+     * @param {Object} options object with all the options.
+     * @return {void}
+     */
+    auditCode() {
+        this.mainGetUnusedCss(this.options.folderToImplode, this.options.ignore).then((unusedStyles) => {
+            if (writeDataFile(unusedStyles) === true) {
+                runHttpServer(this.options.port).then(() => {
+                    console.log(`\nAll unused selectors were ${chalk.bold.blueBright('successfully')} found.`);
+                    console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
+                    console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
+                }).catch((err) => {
+                    exitCodes(501, this.options.port, err);
+                });
+            } else {
+                exitCodes(405, writeDataFile(unusedStyles));
+            }
+        }).catch((err) => {
+            exitCodes(502, '', err);
+        });
+    }
+
+
+    /**
+     * Summary: fixCode is the main function of fixing. It does make all the
+     * modifications and fixes in order to remove all unused css styles. Also
+     * it shows a little output of what has been fixed.
+     *
+     * @async
+     * @param {Object} options object with all the options.
+     * @return {void}
+     */
+    fixCode() {
+        // await is Necessary
+        const unusedStyles = this.mainGetUnusedCss(this.options.folderToImplode, this.options.ignore);
+        if (writeDataFile(unusedStyles) === true) {
+            const cssFiles = findFilesInDir(this.options.folderToImplode, '.css', this.options.ignore);
+            if (!removeUnused(cssFiles, unusedStyles)) { // if there is a mistake, shutdown the program
+                exitCodes(406);
+            }
+            runHttpServer(this.options.port).then(() => {
                 console.log(`\nAll unused selectors ${chalk.bold.blueBright('successfully')} found and fixed.`);
                 console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
                 console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
-            })
-            .catch((err) => {
-                exitCodes(501, options.port, err);
+            }).catch((err) => {
+                exitCodes(501, this.options.port, err);
             });
-    } else {
-        exitCodes(405, writeDataFile(unusedStyles));
+        } else {
+            exitCodes(405, writeDataFile(unusedStyles));
+        }
     }
-}
-
-exports.auditCode = auditCode;
-exports.fixCode = fixCode;
+};
