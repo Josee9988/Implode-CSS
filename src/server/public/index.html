@@ -29,9 +29,8 @@
 	<div id="loader" class="text-center">
 		<!-- If the user doesn't have JavaScript enabled show a warning -->
 		<noscript>
-			<h1><b>We're sorry but ImplodeCss doesn't work properly without JavaScript enabled. Please enable it in order to
-					see
-					your unused CSS styles</b></h1>
+			<h1><b>We're sorry but ImplodeCss doesn't work properly without JavaScript enabled.
+					Please enable it in order to see your unused CSS styles</b></h1>
 		</noscript>
 		<!-- Normal info of loader -->
 		<h1>Loading the data, please wait...</h1>
@@ -43,28 +42,35 @@
 	<!-- Jumbotrón | Top of page headers-->
 	<div class="jumbotron">
 		<h1><b>ImplodeCss information page</b></h1>
-		<h2 class="text-center">Unused CSS styles and more!</h2>
+		<h2>Unused CSS styles and more!</h2>
 	</div>
 
+	<h2><b><i><span id="errorfound" class="error"></span></i></b></h2>
 
-	<p>Total unused selectors found: <b><span id="totalSelectors"></span></b>.</p>
-	<p>Files that does not contain any CSS styles or are empty: <b><span id="emptyLength"></span></b></p>
-	<p>Found: <b><span id="htmlFilesLength"></span></b> files that may contain HTML with references to CSS styles.
-		(.html/.php)</p>
-	<p>Found: <b><span id="cssFilesLength"></span></b> files that may contain CSS styles. (.css)</p>
+	<!-- General information -->
+	<h3><b>General information</b></h3>
+	<p>Found: <b><span id="htmlFilesLength"></span></b> files that may
+		contain HTML with references to CSS styles. (<i>.html/.php</i>)</p>
+	<p>Found: <b><span id="cssFilesLength"></span></b> files that may contain CSS styles. (<i>.css</i>)</p>
 	<p>Found: <b><span id="idsFound"></span></b> ids in your HTML/PHP files.</p>
 	<p>Found: <b><span id="classesFound"></span></b> classes in your HTML/PHP files.</p>
+	<hr>
 
-
+	<!-- Empty files -->
+	<h3><b>Empty files</b></h3>
+	<p>Files that does not contain any CSS styles or are empty: <b><span id="emptyLength"></span></b></p>
 	<ul class="list-group" id="emptyCss">
 		<!-- Empty CSS files will go here -->
 	</ul>
-
 	<hr>
 
+	<!-- Unused selectors (main table) -->
+	<h3><b>Unused selectors</b></h3>
+	<p>Total unused selectors found: <b><span id="totalSelectors"></span></b>.</p>
+
 	<!-- Table for showing the unused CSS styles -->
-	<table class="table table-hover table-striped">
-		<thead class="thead-dark">
+	<table class="table table-hover table-striped responsive">
+		<thead class="thead-dark table">
 			<tr>
 				<th scope="col">Type of Selector</th>
 				<th scope="col">Style name</th>
@@ -75,11 +81,11 @@
 			<!-- Data will go here -->
 		</tbody>
 	</table>
-
 	<hr>
 
+	<!-- Button to the repo -->
 	<button id="githubBtn" type="button" class="btn btn-outline-dark"><a
-			href="https://github.com/Josee9988/Implode-CSS">Github</a></button>
+			href="https://github.com/Josee9988/Implode-CSS">Repository</a></button>
 
 </body>
 

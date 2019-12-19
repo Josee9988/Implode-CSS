@@ -66,3 +66,8 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
+
+/* If there is an error found */
+.error {
+    background-color: #f4511e;
+}

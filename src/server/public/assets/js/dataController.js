@@ -49,25 +49,55 @@ async function createElementInTable(content) {
 }
 
 
-window.addEventListener('load', () => {
+/**
+ * Summary: a function that prints all the empty files found.
+ *
+ * @param {Object} emptyFiles content with all the empty files found.
+ * @return {array}
+ */
+function printEmptyFiles(emptyFiles) {
     const emptyCssFiles = [];
+    emptyCssFiles.push(emptyFiles);
+    document.getElementById('emptyCss').innerHTML += `<li class="list-group-item list-group-item-action list-group-item-danger"><b>${emptyFiles}</b></li>`;
+    return emptyCssFiles;
+}
+
+
+/**
+ * Summary: a function that prints the number of:
+ * html/php files found, css files found, ids found and selectors found.
+ *
+ * @param {Object} content the object with all the lengths to print.
+ * @return {void}
+ */
+function printGeneralInfoFound(content) {
+    document.getElementById('htmlFilesLength').innerText = content.htmlPhpLength;
+    document.getElementById('cssFilesLength').innerText = content.cssFilesLength;
+    document.getElementById('idsFound').innerText = content.idsFoundLength;
+    document.getElementById('classesFound').innerText = content.classesFoundLength;
+}
+
+
+window.addEventListener('load', () => {
+    let emptyCssFiles = [];
     const unusedCss = [].concat.apply([], contents); // FROM 2D array to 1D
 
-    // Creates every element in the table asynchronously
-    unusedCss.forEach((content) => {
-        if (!content.emptyFiles && !content.htmlPhpLength) { // default unused styles
-            createElementInTable(content);
-        } else if (content.htmlPhpLength) { // lengths of the
-            console.log(content);
-        }
-    });
+    try { // gathers all information.
+        // Creates every element in the table
+        unusedCss.forEach((content) => {
+            if (!content.emptyFiles && !content.htmlPhpLength) { // default unused styles
+                createElementInTable(content);
+            }
+        });
+        // Print all the empty files found.
+        emptyCssFiles = printEmptyFiles(unusedCss[unusedCss.length - 2].emptyFiles);
 
-    // Print all the empty files found.
-    emptyCssFiles.push(unusedCss[unusedCss.length - 2].emptyFiles);
-    document.getElementById('emptyCss').innerHTML += `<li class="list-group-item list-group-item-action"><b>${unusedCss[unusedCss.length - 2].emptyFiles}</b></li>`;
-
-    // Print the number of HTML/PHP files and number of selectors found.
-
+        // Print the number of HTML/PHP files and number of selectors found.
+        printGeneralInfoFound(unusedCss[unusedCss.length - 1]);
+    } catch (err) { // if there is an error.
+        document.getElementById('errorfound').innerHTML = `Error found:<br>${err}<br><hr>`;
+        console.error(err);
+    }
 
     // Remove the loader with an animation made in CSS.
     document.getElementById('loader').classList.add('hidden');
