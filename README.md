@@ -86,7 +86,7 @@ sudo npm install -g @josee9988/implode-css
 
 - **Table** with all the unused selectors and more information.
 
-<img src="https://i.imgur.com/h2TFAEU.png" alt="table with unused selectors" title="table with unused selectors" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
+<img src="https://i.imgur.com/vkXgq70.png" alt="table with unused selectors" title="table with unused selectors" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
 
 - **Help** command: `implodeCss -h`
 
@@ -99,12 +99,6 @@ sudo npm install -g @josee9988/implode-css
 - If you do not specify the option to perform...
 
 <img src="https://i.imgur.com/l67EvSs.png" alt="option not specified" title="option not specified" style="border-radius:15px; box-shadow: 6px 6px  #282829; max-height: 500px; max-width:500px;margin-left: auto; margin-right:auto;display: block;margin-left: auto;margin-right:auto;width:50%;"/>
-
----
-
-### **Upcoming features**
-
-- [ ] Make the project **usable by other packages**. Will probably come in version 1.2.
 
 ---
 

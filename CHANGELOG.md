@@ -7,12 +7,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
-[UNRELEASED]
+## [**1.3.0**] - 2019-12-19
 
 ### Added
 
 * More information about the author in the package.json file.
 * Funding link in the package.json file.
+* Errors are now controlled in the webpage.
+* The webpage will show the number of html/php files found.
+* The webpage will show the number of css files found.
+* The webpage will show the number of ids found.
+* The webpage will show the number of classes found.
+* Better readability at the webpage.
+* Better readability in the main.js file.
+
+### Changed
+
+* The CLI command will not show the files that doesn't contain CSS styles (empty).
+* The CLI command will not show the number of html/php files found.
+* The CLI command will not show the number of css files found.
+* The CLI command will not show the number of ids found.
+* The CLI command will not show the number of classes found.
+* Image of the webpage in the readme.md file.
+* Updated dependencies.
 
 ### Fixed
 
@@ -20,6 +37,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 * If the server finds an error, it will try to close it in an expected way before showing the error.
 * The extension will only show if there is a new version, if the user invokes the command implodeCss.
 * Some typos.
+
+### Removed
+
+* Upcoming features in the readme.md file.
+* Chalk import in the src/controller/getCssUnused.js file.
 
 ## [**1.2.0**] - 2019-12-13
 

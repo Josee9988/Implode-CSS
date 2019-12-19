@@ -58,9 +58,6 @@ module.exports = class ImplodeCssClass {
         const htmlPhpFiles = getArrayHtmlPhpPaths(this.options.folderToImplode, this.options.ignore);
         const cssFiles = findFilesInDir(this.options.folderToImplode, '.css', this.options.ignore);
 
-        console.log(`Found: ${chalk.bold.yellow(htmlPhpFiles.length)} files that may contain references to CSS styles. (.html/.php)`);
-        console.log(`Found: ${chalk.bold.yellow(cssFiles.length)} files that contain CSS styles. (.css)\n`);
-
         // if there is not enough files to look for.
         if (htmlPhpFiles.length === 0 || cssFiles.length === 0) {
             exitCodes(404); // it will stop the process.
@@ -74,9 +71,6 @@ module.exports = class ImplodeCssClass {
             ids = ids.concat(getIdsReferencedInHtml(htmlPhpFiles[i]));
             classes = classes.concat(getClassesReferencedInHtml(htmlPhpFiles[i]));
         }
-
-        console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML/PHP files.`);
-        console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.\n`);
 
         let unusedArray = getUnusedCss(cssFiles, ids, classes);
         const test = {

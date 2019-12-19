@@ -9,8 +9,6 @@
  */
 
 import fs from 'fs';
-import chalk from 'chalk';
-
 
 /**
  * Summary getUnusedCss receives all the css files, and all the ids and classes found from
@@ -89,7 +87,6 @@ export function getUnusedCss(cssFiles, idsFoundHTML, classFoundHTML) {
     // check for files without any CSS selector and adds it to an array.
     for (let i = 0; i < classInCss.length; i++) {
         if (classInCss[i].css === null && idsInCss[i].css === null) {
-            console.log(`${chalk.bgRed('Unconsistency')} - File: '${chalk.bold(classInCss[i].path)}'. does not contain any CSS styles!`);
             emptyCssFiles = emptyCssFiles.concat({
                 emptyFiles: classInCss[i].path,
             });
