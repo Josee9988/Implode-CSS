@@ -55,13 +55,19 @@ window.addEventListener('load', () => {
 
     // Creates every element in the table asynchronously
     unusedCss.forEach((content) => {
-        if (content.emptyFiles) {
-            emptyCssFiles.push(content.emptyFiles);
-            document.getElementById('emptyCss').innerHTML += `<li class="list-group-item list-group-item-action"><b>${content.emptyFiles}</b></li>`;
-        } else {
+        if (!content.emptyFiles && !content.htmlPhpLength) { // default unused styles
             createElementInTable(content);
+        } else if (content.htmlPhpLength) { // lengths of the
+            console.log(content);
         }
     });
+
+    // Print all the empty files found.
+    emptyCssFiles.push(unusedCss[unusedCss.length - 2].emptyFiles);
+    document.getElementById('emptyCss').innerHTML += `<li class="list-group-item list-group-item-action"><b>${unusedCss[unusedCss.length - 2].emptyFiles}</b></li>`;
+
+    // Print the number of HTML/PHP files and number of selectors found.
+
 
     // Remove the loader with an animation made in CSS.
     document.getElementById('loader').classList.add('hidden');

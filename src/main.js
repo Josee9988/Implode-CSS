@@ -63,7 +63,7 @@ module.exports = class ImplodeCssClass {
 
         // if there is not enough files to look for.
         if (htmlPhpFiles.length === 0 || cssFiles.length === 0) {
-            exitCodes(404);
+            exitCodes(404); // it will stop the process.
         }
 
         // Find ids and classes in the HTML/PHP files
@@ -78,7 +78,14 @@ module.exports = class ImplodeCssClass {
         console.log(`Found: ${chalk.bold.yellow(ids.length)} total ${chalk.bold('ids')} in your HTML/PHP files.`);
         console.log(`Found: ${chalk.bold.yellow(classes.length)} total ${chalk.bold('classes')} in your HTML/PHP files.\n`);
 
-        const unusedArray = getUnusedCss(cssFiles, ids, classes);
+        let unusedArray = getUnusedCss(cssFiles, ids, classes);
+        const test = {
+            htmlPhpLength: htmlPhpFiles.length,
+            cssFilesLength: cssFiles.length,
+            idsFoundLength: ids.length,
+            classesFoundLength: classes.length,
+        };
+        unusedArray = unusedArray.concat(test);
         return unusedArray;
     }
 
