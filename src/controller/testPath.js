@@ -33,13 +33,6 @@ export async function testPath(startPath) {
     } catch (err) {
         exitCodes(402, startPath, err);
     }
-
-    // File write permissions
-    /* try {
-        fs.accessSync(startPath, fs.constants.W_OK);
-    } catch (err) {
-        exitCodes(403, startPath, err);
-    } */
 }
 
 
@@ -62,10 +55,6 @@ export async function testPathFile(startPath) {
         exitCodes(402, startPath);
     }
 
-    // Directory write permissions
-    /*  fs.access(startPath, fs.W_OK, () => {
-          exitCodes(403, startPath);
-      }); */
 }
 
 export default testPath;

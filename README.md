@@ -102,6 +102,59 @@ sudo npm install -g @josee9988/implode-css
 
 ---
 
+## **Error codes** ❌
+
+<details>
+<summary>Click to see all the <b>error</b> and <b>informational</b> codes and it's explanation</summary>
+
+### **200**
+
+- Exists without errors.
+
+### **201**
+
+- Exit without an expected code, this code should not appear at all.
+
+### **401**
+
+- Bad arguments passed by the user. Some of the arguments used are not expected.
+
+### **402**
+
+- The path (most of the times the main folder) doesn't have read permissions, so the program could not read your files.
+
+### **403** [Not used]
+
+- The path doesn't have write permissions (Not used anywhere yet. see 405 instead).
+
+### **404**
+
+- Found 0 CSS files or 0 HTML files. The user should provide atleast 1 CSS files and 1 HTML file.
+
+### **405**
+
+- The local temporary file doesn't have write permissions so the page with the results won't get any data.
+
+### **406**
+
+- A path inside the main folder doesn't have read or write permissions (not specified).
+
+### **500**
+
+- Unknown error, the package specified an error that doesn't exist (should not appear, if so, please contact us and tell us how).
+
+### **501**
+
+- The selected port couldn't be opened.
+
+### **502**
+
+- Unexpected error (should not appear, if so, please contact us and tell us how).
+
+</details>
+
+---
+
 ### Did you enjoyed the package? Help us raise these numbers up 🥰 🎉
 
 [![Github followers](https://img.shields.io/github/followers/Josee9988.svg?style=social)](#did-you-enjoyed-the-package-help-us-raise-these-numbers-up--)

@@ -76,7 +76,7 @@ export function showCodeAndExit(code, extraInformation = 'Not given', errorTrace
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 501')} - Permission denied at setting up the server in port ${extraInformation} to show the results.`);
             break;
         case 502:
-            console.error(chalk.bold.red('\nNot expected error!'));
+            console.error(chalk.bold.red('\nUnexpected error!'));
             console.error(`${chalk.bold.red('errno: ') + chalk.bold(' 502')} - Not expected error, happened in main process.`);
             break;
 
