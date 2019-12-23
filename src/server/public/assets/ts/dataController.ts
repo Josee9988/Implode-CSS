@@ -9,6 +9,32 @@
  * @link https://github.com/Josee9988/Implode-CSS/issues issues or enhancements.
  */
 
+class UnusedSelector {
+    constructor(private css: string, private path: string) { }
+    getCss(): string {
+        return this.css;
+    }
+    getPath(): string {
+        return this.path;
+    }
+}
+
+class GeneralInfo {
+    constructor(private htmlPhpLength: string, private cssFilesLength: string, private idsFoundLength: string, private classesFoundLength: string) { }
+    gethtmlPhpLength(): string {
+        return this.htmlPhpLength;
+    }
+    getcssFilesLength(): string {
+        return this.cssFilesLength;
+    }
+    getidsFoundLength(): string {
+        return this.idsFoundLength;
+    }
+    getclassesFoundLength(): string {
+        return this.classesFoundLength;
+    }
+}
+
 /**
  * Summary: Function that receives an unused style and its path and then
  * returns the result as a tds of a table.
@@ -17,17 +43,17 @@
  * @param {String} path path of the unused style.
  * @return {String} to be printed in the tr of the table.
  */
-function createUnusedTemplate(element, path) {
+function createUnusedTemplate<T extends UnusedSelector>(cssAndPath: T): string {
     let type = '';
-    if (element.substr(0, 1) === '#') {
+    if (cssAndPath.getCss().substr(0, 1) === '#') {
         // if ii is an id:
         type = 'Id';
     } else {
         type = 'Class';
     }
     return `<td>${type}</td>
-            <td>${element.substr(1)}</td>
-            <td>${path}</td>`;
+            <td>${cssAndPath.getCss().substr(1)}</td>
+            <td>${cssAndPath.getPath()}</td>`;
 }
 
 /**
@@ -38,11 +64,10 @@ function createUnusedTemplate(element, path) {
  * @param {Object} content with a path and a CSS selector.
  * @return {void}
  */
-function createElementInTable(content: any): void {
+function createElementInTable<T extends UnusedSelector>(cssAndPath: T): void {
     const dataTable = document.getElementById('dataTable') as HTMLElement;
-    const { path } = content;
     const tr = document.createElement('tr');
-    tr.innerHTML = createUnusedTemplate(content.css, path);
+    tr.innerHTML = createUnusedTemplate(cssAndPath);
     dataTable.appendChild(tr);
 }
 
@@ -52,7 +77,7 @@ function createElementInTable(content: any): void {
  * @param {Object} emptyFiles content with all the empty files found.
  * @return {array}
  */
-function printEmptyFiles(emptyFiles) {
+function printEmptyFiles(emptyFiles: string): string[] {
     const emptyCss = document.getElementById('emptyCss') as HTMLElement;
     const emptyCssFiles = [];
     emptyCssFiles.push(emptyFiles);
@@ -67,15 +92,15 @@ function printEmptyFiles(emptyFiles) {
  * @param {Object} content the object with all the lengths to print.
  * @return {void}
  */
-function printGeneralInfoFound(content) {
+function printGeneralInfoFound<T extends GeneralInfo>(information: T): void {
     const htmlFilesLength = document.getElementById('htmlFilesLength') as HTMLElement;
     const cssFilesLength = document.getElementById('cssFilesLength') as HTMLElement;
     const idsFound = document.getElementById('idsFound') as HTMLElement;
     const classesFound = document.getElementById('classesFound') as HTMLElement;
-    htmlFilesLength.innerText = content.htmlPhpLength;
-    cssFilesLength.innerText = content.cssFilesLength;
-    idsFound.innerText = content.idsFoundLength;
-    classesFound.innerText = content.classesFoundLength;
+    htmlFilesLength.innerText = information.gethtmlPhpLength();
+    cssFilesLength.innerText = information.getcssFilesLength();
+    idsFound.innerText = information.getidsFoundLength();
+    classesFound.innerText = information.getclassesFoundLength();
 }
 
 window.addEventListener('load', () => {
@@ -84,24 +109,27 @@ window.addEventListener('load', () => {
     const totalSelectors = document.getElementById('totalSelectors') as HTMLElement;
     const emptyLength = document.getElementById('emptyLength') as HTMLElement;
 
-    totalSelectors
-
-    let emptyCssFiles = [];
-    const unusedCss = [].concat.apply([], contents); // FROM 2D array to 1D
+    //@ts-ignore
+    const content: Array<any> = contents;
+    let emptyCssFiles: any = [];
+    const unusedCss = [].concat.apply([], content); // FROM 2D array to 1D
 
     try { // gathers all information. Creates every element in the table.
-        unusedCss.forEach(content => {
+        for (let content of unusedCss) {
             if (!content.emptyFiles && !content.htmlPhpLength) { // default unused styles
-                createElementInTable(content);
+                createElementInTable(new UnusedSelector(content.css, content.path));
             }
-        });
+        };
         // Print all the empty files found.
-        emptyCssFiles = printEmptyFiles(
-            unusedCss[unusedCss.length - 2].emptyFiles,
-        );
+        emptyCssFiles = printEmptyFiles(unusedCss[unusedCss.length - 2].emptyFiles);
 
         // Print the number of HTML/PHP files and number of selectors found.
-        printGeneralInfoFound(unusedCss[unusedCss.length - 1]);
+
+        printGeneralInfoFound(new GeneralInfo(
+            unusedCss[unusedCss.length - 1].htmlPhpLength,
+            unusedCss[unusedCss.length - 1].cssFilesLength,
+            unusedCss[unusedCss.length - 1].idsFoundLength,
+            unusedCss[unusedCss.length - 1].classesFoundLength));
     } catch (err) { // if there is an error.
         errorfound.innerHTML = `Error found:<br>${err}<br><hr>`;
         console.error(err);
