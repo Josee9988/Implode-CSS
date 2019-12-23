@@ -7,11 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
-## [Unreleased]
+## [**1.3.1**] - 2019-12-23
 
 ### Added
 
 * Information about the error codes in the readme.md file.
+* Imported esm globally in the main.js file aswell.
+* More keywords in the package.json file.
 
 ## [**1.3.0**] - 2019-12-19
 

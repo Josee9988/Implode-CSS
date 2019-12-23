@@ -1,3 +1,4 @@
+/* eslint-disable space-in-parens */ /* eslint-disable no-global-assign */
 /* eslint-disable max-len */
 /**
  * @file main.js, it includes the logic of the package
@@ -7,7 +8,6 @@
  * @link https://github.com/Josee9988/Implode-CSS repository.
  * @link https://github.com/Josee9988/Implode-CSS/issues issues or enhancements.
  */
-
 import chalk from 'chalk';
 import {
     testPath,
@@ -28,6 +28,8 @@ import {
     writeDataFile,
 } from './server/createServer';
 import removeUnused from './controller/fixCode';
+
+require = require('esm')(module /* , options */ );
 
 
 module.exports = class ImplodeCssClass {
