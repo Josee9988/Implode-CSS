@@ -31,7 +31,8 @@
         "redundant code"
     ],
     "scripts": {
-        "compileWebPage": "tsc src/server/public/assets/ts/dataController.ts --out src/server/public/assets/js/dataController.js",
+        "build": "tsc ./src/server/public/assets/ts/* --outDir ./src/server/public/assets/js/ && echo '' > ./src/server/public/assets/js/data.js",
+        "compileWeb": "tsc --target es5 --module System --outFile ./src/server/public/assets/js/dataController.js",
         "test": "mocha 'test/cliTest' --require esm || true"
     },
     "repository": {
@@ -56,6 +57,7 @@
         "esm": "^3.2.25",
         "inquirer": "^7.0.1",
         "inquirer-fuzzy-path": "^2.2.0",
+        "typescript": "^3.7.4",
         "update-notifier": "^3.0.1"
     },
     "devDependencies": {

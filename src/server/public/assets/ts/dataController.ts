@@ -115,21 +115,18 @@ window.addEventListener('load', () => {
     const unusedCss = [].concat.apply([], content); // FROM 2D array to 1D
 
     try { // gathers all information. Creates every element in the table.
-        for (let content of unusedCss) {
+        for (let element of unusedCss) {
+            const content: any = element;
             if (!content.emptyFiles && !content.htmlPhpLength) { // default unused styles
                 createElementInTable(new UnusedSelector(content.css, content.path));
             }
         };
-        // Print all the empty files found.
+
+        // @ts-ignore // Print all the empty files found.
         emptyCssFiles = printEmptyFiles(unusedCss[unusedCss.length - 2].emptyFiles);
 
-        // Print the number of HTML/PHP files and number of selectors found.
-
-        printGeneralInfoFound(new GeneralInfo(
-            unusedCss[unusedCss.length - 1].htmlPhpLength,
-            unusedCss[unusedCss.length - 1].cssFilesLength,
-            unusedCss[unusedCss.length - 1].idsFoundLength,
-            unusedCss[unusedCss.length - 1].classesFoundLength));
+        // @ts-ignore Print the number of HTML/PHP files and number of selectors found.
+        printGeneralInfoFound(new GeneralInfo(unusedCss[unusedCss.length - 1].htmlPhpLength, unusedCss[unusedCss.length - 1].cssFilesLength, unusedCss[unusedCss.length - 1].idsFoundLength, unusedCss[unusedCss.length - 1].classesFoundLength));
     } catch (err) { // if there is an error.
         errorfound.innerHTML = `Error found:<br>${err}<br><hr>`;
         console.error(err);

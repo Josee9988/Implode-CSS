@@ -116,15 +116,16 @@ window.addEventListener('load', function () {
     var unusedCss = [].concat.apply([], content); // FROM 2D array to 1D
     try { // gathers all information. Creates every element in the table.
         for (var _i = 0, unusedCss_1 = unusedCss; _i < unusedCss_1.length; _i++) {
-            var content_1 = unusedCss_1[_i];
+            var element = unusedCss_1[_i];
+            var content_1 = element;
             if (!content_1.emptyFiles && !content_1.htmlPhpLength) { // default unused styles
                 createElementInTable(new UnusedSelector(content_1.css, content_1.path));
             }
         }
         ;
-        // Print all the empty files found.
+        // @ts-ignore // Print all the empty files found.
         emptyCssFiles = printEmptyFiles(unusedCss[unusedCss.length - 2].emptyFiles);
-        // Print the number of HTML/PHP files and number of selectors found.
+        // @ts-ignore Print the number of HTML/PHP files and number of selectors found.
         printGeneralInfoFound(new GeneralInfo(unusedCss[unusedCss.length - 1].htmlPhpLength, unusedCss[unusedCss.length - 1].cssFilesLength, unusedCss[unusedCss.length - 1].idsFoundLength, unusedCss[unusedCss.length - 1].classesFoundLength));
     }
     catch (err) { // if there is an error.
