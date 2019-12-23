@@ -38,11 +38,12 @@ function createUnusedTemplate(element, path) {
  * @param {Object} content with a path and a CSS selector.
  * @return {void}
  */
-async function createElementInTable(content) {
+function createElementInTable(content: any): void {
+    const dataTable = document.getElementById('dataTable') as HTMLElement;
     const { path } = content;
     const tr = document.createElement('tr');
     tr.innerHTML = createUnusedTemplate(content.css, path);
-    document.getElementById('dataTable').appendChild(tr);
+    dataTable.appendChild(tr);
 }
 
 /**
@@ -52,11 +53,10 @@ async function createElementInTable(content) {
  * @return {array}
  */
 function printEmptyFiles(emptyFiles) {
+    const emptyCss = document.getElementById('emptyCss') as HTMLElement;
     const emptyCssFiles = [];
     emptyCssFiles.push(emptyFiles);
-    document.getElementById(
-        'emptyCss',
-    ).innerHTML += `<li class="list-group-item list-group-item-action list-group-item-danger"><b>${emptyFiles}</b></li>`;
+    emptyCss.innerHTML += `<li class="list-group-item list-group-item-action list-group-item-danger"><b>${emptyFiles}</b></li>`;
     return emptyCssFiles;
 }
 
@@ -68,25 +68,30 @@ function printEmptyFiles(emptyFiles) {
  * @return {void}
  */
 function printGeneralInfoFound(content) {
-    document.getElementById('htmlFilesLength').innerText =
-        content.htmlPhpLength;
-    document.getElementById('cssFilesLength').innerText =
-        content.cssFilesLength;
-    document.getElementById('idsFound').innerText = content.idsFoundLength;
-    document.getElementById('classesFound').innerText =
-        content.classesFoundLength;
+    const htmlFilesLength = document.getElementById('htmlFilesLength') as HTMLElement;
+    const cssFilesLength = document.getElementById('cssFilesLength') as HTMLElement;
+    const idsFound = document.getElementById('idsFound') as HTMLElement;
+    const classesFound = document.getElementById('classesFound') as HTMLElement;
+    htmlFilesLength.innerText = content.htmlPhpLength;
+    cssFilesLength.innerText = content.cssFilesLength;
+    idsFound.innerText = content.idsFoundLength;
+    classesFound.innerText = content.classesFoundLength;
 }
 
 window.addEventListener('load', () => {
+    const errorfound = document.getElementById('errorfound') as HTMLElement;
+    const loader = document.getElementById('loader') as HTMLElement;
+    const totalSelectors = document.getElementById('totalSelectors') as HTMLElement;
+    const emptyLength = document.getElementById('emptyLength') as HTMLElement;
+
+    totalSelectors
+
     let emptyCssFiles = [];
     const unusedCss = [].concat.apply([], contents); // FROM 2D array to 1D
 
-    try {
-        // gathers all information.
-        // Creates every element in the table
+    try { // gathers all information. Creates every element in the table.
         unusedCss.forEach(content => {
-            if (!content.emptyFiles && !content.htmlPhpLength) {
-                // default unused styles
+            if (!content.emptyFiles && !content.htmlPhpLength) { // default unused styles
                 createElementInTable(content);
             }
         });
@@ -97,20 +102,17 @@ window.addEventListener('load', () => {
 
         // Print the number of HTML/PHP files and number of selectors found.
         printGeneralInfoFound(unusedCss[unusedCss.length - 1]);
-    } catch (err) {
-        // if there is an error.
-        document.getElementById(
-            'errorfound',
-        ).innerHTML = `Error found:<br>${err}<br><hr>`;
+    } catch (err) { // if there is an error.
+        errorfound.innerHTML = `Error found:<br>${err}<br><hr>`;
         console.error(err);
     }
 
     // Remove the loader with an animation made in CSS.
-    document.getElementById('loader').classList.add('hidden');
+    loader.classList.add('hidden');
 
     // Show information about the number of unused selectors found.
-    document.getElementById('totalSelectors').innerText = `${unusedCss.length}`;
+    totalSelectors.innerText = unusedCss !== null ? unusedCss.length.toString() : '0' as string;
 
     // Show the number of files that are not used:
-    document.getElementById('emptyLength').innerText = emptyCssFiles.length;
+    emptyLength.innerText = emptyCssFiles !== null ? emptyCssFiles.length.toString() : '0' as string;
 });
