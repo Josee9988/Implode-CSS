@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 * WebPage uses TypeScript to create the controller which gathers the data and displays it.
 * Npm node script 'npm run build' must be runned before doing any pushes to the repo as it removes all the data from the temp file (data.js) and transpiles the TypeScript into JavaScript.
+* Folder .vscode to be uploaded to GitHub.
+* Extension recommendations.
 
 ## [**1.3.1**] - 2019-12-23
 
