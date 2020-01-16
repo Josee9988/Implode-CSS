@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+### Fixed
+
+* Better error handling in the HTML viewpage.
+
 ### Added
 
 * WebPage uses TypeScript to create the controller which gathers the data and displays it.

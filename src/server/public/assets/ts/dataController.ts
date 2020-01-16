@@ -117,6 +117,7 @@ window.addEventListener('load', () => {
             throw new Error(`The contents are not defined in the file: "data.js". Maybe you don't have permissions to write in that file
         or something went unexpectedly.<br><hr>`);
         }
+
         //@ts-ignore
         const content: Array<any> = contents;
 

@@ -1,4 +1,3 @@
-"use strict";
 /* eslint-disable no-undef */ /* eslint-disable prefer-spread */
 /**
  * @file dataController is a file that contains all the function that the index.html needs
