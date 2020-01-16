@@ -125,21 +125,24 @@ module.exports = class ImplodeCssClass {
      */
     fixCode() {
         // await is Necessary
-        const unusedStyles = this.mainGetUnusedCss(this.options.folderToImplode, this.options.ignore);
-        if (writeDataFile(unusedStyles) === true) {
-            const cssFiles = findFilesInDir(this.options.folderToImplode, '.css', this.options.ignore);
-            if (!removeUnused(cssFiles, unusedStyles)) { // if there is a mistake, shutdown the program
-                exitCodes(406);
+        this.mainGetUnusedCss(this.options.folderToImplode, this.options.ignore).then((unusedStyles) => {
+            if (writeDataFile(unusedStyles) === true) {
+                const cssFiles = findFilesInDir(this.options.folderToImplode, '.css', this.options.ignore);
+                if (!removeUnused(cssFiles, unusedStyles)) { // if there is a mistake, shutdown the program
+                    exitCodes(406);
+                }
+                runHttpServer(this.options.port).then(() => {
+                    console.log(`\nAll unused selectors ${chalk.bold.blueBright('successfully')} found and fixed.`);
+                    console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
+                    console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
+                }).catch((err) => {
+                    exitCodes(501, this.options.port, err);
+                });
+            } else {
+                exitCodes(405, writeDataFile(unusedStyles));
             }
-            runHttpServer(this.options.port).then(() => {
-                console.log(`\nAll unused selectors ${chalk.bold.blueBright('successfully')} found and fixed.`);
-                console.log(`For more information or issues visit: ${chalk.bold('\'https://github.com/Josee9988/Implode-CSS\'')}`);
-                console.log(`To stop the server type: ${chalk.bold('CTRL+C')}`);
-            }).catch((err) => {
-                exitCodes(501, this.options.port, err);
-            });
-        } else {
-            exitCodes(405, writeDataFile(unusedStyles));
-        }
+        }).catch((err) => {
+            exitCodes(502, '', err);
+        });
     }
 };

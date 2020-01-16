@@ -89,7 +89,7 @@ export async function cli(rawArgs) {
             ImplodeCss.auditCode(options);
         } else if (options.fix) { // if the user wants to fix
             const answer = await confirm({
-                message: 'Do you want to fix your data? Remember that this feature is beta and may not be perfect is some scenarios, please do a backup first',
+                message: 'Do you want to fix your data? Remember that this feature is beta and may not be perfect is some scenarios, please do a backup first.',
                 default: true,
             });
             if (answer === true) { // if the user wants to continue

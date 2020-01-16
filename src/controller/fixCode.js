@@ -25,10 +25,14 @@ export default async function removeUnused(cssFiles, styles) {
         cssFiles.forEach((file) => {
             fileReaded = fs.readFileSync(file, 'utf-8'); // reads the file
             styles.forEach((stylesPath) => { // foreach of every path
-                stylesPath.forEach((styleToRemove) => { // gets every element with X.css and X.path
-                    const regex = new RegExp(`(?:^|}|\\.|\\#)\\s*${styleToRemove.css.substr(1)}\\s*(\\{|\\:|\\>|\\s|\\+|\\~)([^}]*)}`);
-                    fileReaded = fileReaded.replace(regex, '{}');
-                });
+                for (let i = 0; i < stylesPath.length; i++) {
+                    if (stylesPath[i].path && stylesPath[i].css) {
+                        const regex = new RegExp(`(?:^|}|\\.|\\#)\\s*${stylesPath[i].css.substr(1)}\\s*(\\{|\\:|\\>|\\s|\\+|\\~)([^}]*)}`);
+                        fileReaded = fileReaded.replace(regex, '{}');
+                    } else {
+                        break;
+                    }
+                }
             });
             // Removes blank lines
             fs.writeFileSync(file, fileReaded.replace(/^[ \t\n]*$/gm, ''));
@@ -36,7 +40,7 @@ export default async function removeUnused(cssFiles, styles) {
             fs.writeFileSync(file, fileReaded.replace(/^({)(})/gm, ''));
         });
     } catch (err) {
-        console.log(`Error: ${err}`);
+        console.log(`Error found while removing unused styles: ${err}`);
         return false;
     }
     return true;

@@ -49,6 +49,7 @@ export default async function createProcessesHandlers() {
             chalk.bold('https://github.com/Josee9988/Implode-CSS/issues')}`);
     });
     process.on('warning', (warning) => {
+        console.warn(`Warning found: ${warning}\n`); // Print the warning
         console.warn(warning.name); // Print the warning name
         console.warn(warning.message); // Print the warning message
         console.warn(warning.stack); // Print the stack trace

@@ -7,11 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
-## [Unreleased]
+## [**1.3.2**] - 2020-01-16
 
 ### Fixed
 
 * Better error handling in the HTML viewpage.
+* Problem that made the Fix option not work at all.
 
 ### Added
 
