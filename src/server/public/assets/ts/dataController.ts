@@ -109,12 +109,19 @@ window.addEventListener('load', () => {
     const totalSelectors = document.getElementById('totalSelectors') as HTMLElement;
     const emptyLength = document.getElementById('emptyLength') as HTMLElement;
 
-    //@ts-ignore
-    const content: Array<any> = contents;
     let emptyCssFiles: any = [];
-    const unusedCss = [].concat.apply([], content); // FROM 2D array to 1D
 
     try { // gathers all information. Creates every element in the table.
+        //@ts-ignore
+        if (typeof contents === 'undefined') {
+            throw new Error(`The contents are not defined in the file: "data.js". Maybe you don't have permissions to write in that file
+        or something went unexpectedly.<br><hr>`);
+        }
+        //@ts-ignore
+        const content: Array<any> = contents;
+
+        const unusedCss = [].concat.apply([], content); // FROM 2D array to 1D
+
         for (let element of unusedCss) {
             const content: any = element;
             if (!content.emptyFiles && !content.htmlPhpLength) { // default unused styles
@@ -127,17 +134,17 @@ window.addEventListener('load', () => {
 
         // @ts-ignore Print the number of HTML/PHP files and number of selectors found.
         printGeneralInfoFound(new GeneralInfo(unusedCss[unusedCss.length - 1].htmlPhpLength, unusedCss[unusedCss.length - 1].cssFilesLength, unusedCss[unusedCss.length - 1].idsFoundLength, unusedCss[unusedCss.length - 1].classesFoundLength));
-    } catch (err) { // if there is an error.
+
+        // Show information about the number of unused selectors found.
+        totalSelectors.innerText = unusedCss !== null ? unusedCss.length.toString() : '0' as string;
+
+        // Show the number of files that are not used:
+        emptyLength.innerText = emptyCssFiles !== null ? emptyCssFiles.length.toString() : '0' as string;
+
+    } catch (err) { // if there is an error it will output it in the HTML.
         errorfound.innerHTML = `Error found:<br>${err}<br><hr>`;
-        console.error(err);
+    } finally {
+        // Remove the loader with an animation made in CSS.
+        loader.classList.add('hidden');
     }
-
-    // Remove the loader with an animation made in CSS.
-    loader.classList.add('hidden');
-
-    // Show information about the number of unused selectors found.
-    totalSelectors.innerText = unusedCss !== null ? unusedCss.length.toString() : '0' as string;
-
-    // Show the number of files that are not used:
-    emptyLength.innerText = emptyCssFiles !== null ? emptyCssFiles.length.toString() : '0' as string;
 });
